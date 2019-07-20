@@ -245,7 +245,7 @@ function loop(){
 var txt = "Nous sommes les <b>“meilleurs” </b> \n \n .. Nous avons une <b>vision</b>,\n \n . Nous avons un but,\n \n . Nous avons un objectif. \n \n . Rester toujours les <b>meilleurs</b> \n \n . Nous sommes \n \n . “<b>Meilleurs parmi les meilleurs</b>”";
     var options= {
         strings: txt.split("."),
-        typeSpeed: 10,
+        typeSpeed: 50,
         backSpeed: 100
     }
     var typed = new Typed("#typed", options);
