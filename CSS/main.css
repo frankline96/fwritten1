@@ -319,7 +319,7 @@ body {
 .bghist{
       width:100%;
       height:250px;
-      background:url(Images/bghist.jpg);
+      background:url('Images/bghist.jpg');
       background-size:100% 250px;
       background-repeat: no-repeat;
       position:relative;
