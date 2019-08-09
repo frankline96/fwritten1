@@ -636,7 +636,7 @@ body {
 .bghistcomp{
       width:98%;
       height:250px;
-      background:url(bghist.jpg);
+      background:url(images/bghist.jpg);
       background-size:100% 250px;
       background-repeat: no-repeat;
      position:relative;
