@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+
+<meta name="author" content="Frankline Chisom">
+<title>Coronation du chef des chasseurs du Canton de Madaoua</title>
+<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/main.css">
+<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/glitch.css">
+	<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/profile.css">
+	<link rel="stylesheet" href="/sdcard/Meilleurs/journal/journal.css">
+<script src="/sdcard/Meilleurs/profiles/main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init();">
+    
+<div class=" ">
+<div class="head"><canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div><div class ="head2"><br /> <br/><br/> <br /><br /><br/><br/>
+     <div class="glitch" data-text="bouzazois">bouzazois</div>
+
+
+
+
+
+            <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); ">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<div class="title">Coronation du chef des chasseurs du Canton de Madaoua.</div>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/><br/><div class="blogcont">
+	<span class="firstlet">S</span>ome recited what they had heard on Rush Limbaugh or NPR. But most of them were too busy with work or
+their kids to pay much attention to politics, and they spoke instead of what they saw before them: a plant closed, a promotion, a high heating bill, a parent in a nursing home, a child’s first step. No blinding insights emerged from these months of conversation. If anything, what struck me was just how
+modest people’s hopes were, and how much of what they believed seemed to hold constant across race, region, religion, and class. Most of them thought that anybody willing to work should be able to find a job that paid a
+living wage. They figured that people shouldn’t have to file for bankruptcy because they got sick. They believed
+that every child should have a genuinely good education—that it shouldn’t just be a bunch of talk—and that those
+same children should be able to go to college even if their parents weren’t rich. They wanted to be safe, from
+criminals and from terrorists; they wanted clean air, clean water, and time with their kids. And when they got old, they wanted to be able to retire with some dignity and respect. That was about it. It wasn’t much. And although they understood that how they did in life depended mostly on
+their own efforts—although they didn’t expect government to solve all their problems, and certainly didn’t like
+seeing their tax dollars wasted—they figured that government should help. I told them that they were right: government couldn’t solve all their problems. But with a slight change in priorities
+we could make sure every child had a decent shot at life and meet the challenges we faced as a nation. More
+often than not, folks would nod in agreement and ask how they could get involved. And by the time I was back on
+the road, with a map on the passenger’s seat, on my way to my next stop, I knew once again just why I’d gone
+into politics. I felt like working harder than I’d ever worked in my life. THIS BOOK GROWS directly out of those conversations on the campaign trail. Not only did my encounters with<br/><br/>
+<div style=" background: url(journal2.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px; "></div><br/>
+voters confirm the fundamental decency of the American people, they also reminded me that at the core of the
+American experience are a set of ideals that continue to stir our collective conscience; a common set of values
+that bind us together despite our differences; a running thread of hope that makes our improbable experiment in
+democracy work. These values and ideals find expression not just in the marble slabs of monuments or in the
+recitation of history books. They remain alive in the hearts and minds of most Americans—and can inspire us to
+pride, duty, and sacrifice. I recognize the risks of talking this way. In an era of globalization and dizzying technological change, cutthroat
+politics and unremitting culture wars, we don’t even seem to possess a shared language with which to discuss our
+ideals, much less the tools to arrive at some rough consensus about how, as a nation, we might work together to
+bring those ideals about. Most of us are wise to the ways of admen, pollsters, speechwriters, and pundits. We
+know how high-flying words can be deployed in the service of cynical aims, and how the noblest sentiments can
+be subverted in the name of power, expedience, greed, or intolerance. Even the standard high school history
+textbook notes the degree to which, from its very inception, the reality of American life has strayed from its myths. In such a climate, any assertion of shared ideals or common values might seem hopelessly naïve, if not downright
+dangerous—an attempt to gloss over serious differences in policy and performance or, worse, a means of muffling
+the complaints of those who feel ill served by our current institutional arrangements. My argument, however, is that we have no choice. You don’t need a poll to know that the vast majority of
+Americans—Republican, Democrat, and independent—are weary of the dead zone that politics has become, in
+which narrow interests vie for advantage and ideological minorities seek to impose their own versions of absolute
+truth. Whether we’re from red states or blue states, we feel in our gut the lack of honesty, rigor, and common
+sense in our policy debates, and dislike what appears to be a continuous menu of false or cramped choices. Religious or secular, black, white, or brown, we sense— correctly—that the nation’s most significant challenges are
+being ignored, and that if we don’t change course soon, we may be the first generation in a very long time that
+leaves behind a weaker and more fractured America than the one we inherited. Perhaps more than any other time
+in our recent history, we need a new kind of politics, one that can excavate and build upon those shared
+understandings that pull us together as Americans. That’s the topic of this book: how we might begin the process of changing our politics and our civic life. This isn’t
+to say that I know exactly how to do it. I don’t. Although I discuss in each chapter a number of our most pressing
+policy challenges, and suggest in broad strokes the path I believe we should follow, my treatment of the issues is
+often partial and incomplete. I offer no unifying theory of American government, nor do these
+pages provide a manifesto for action, complete with charts and graphs, timetables and ten-point plans. Instead what I offer is something more modest: personal reflections on those values and ideals that have led me
+to public life, some thoughts on the ways that our current political discourse unnecessarily divide            
+</div>
+
+</div>
+<script id="dsq-count-scr" src="//bouzazois.disqus.com/count.js" async></script>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = bouzazois.disqus.com;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = bouzazois.tk; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bouzazois.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+<br/><br/>
+<div class="whorwe  ">Autres Articles</div><div class="bgprofs" style="background-color:white;">
+<a href="/sdcard/Meilleurs/Journal/coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;"><div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font></div></div></a><br/>
+<div class="hrjournal"></div><br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;"><div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /><font size="1px"> &boxh;Frankline Chisom</font></div></div></a><br/><div class="hrjournal"></div><br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="180px" class="imgjournal"><div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /><font size="1px"> &boxh;Frankline Chisom</font></div></div></a><br/><br/><div style="border-bottom:2px solid grey;"></div><br />
+<center><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;"><div class="plus">... plus d'articles</div></a></center><br /><br />
+<br />
+</div>
+<br/><br/>
+    
+
+    
+    
+      
+ 
+<style>form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}</style><br/><br/><hr/>
+    <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+                 
+       <div class="contact" >    <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+ 
+    
+<div class="footer  "><br/>
+	<div class="spons">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="/sdcard/Meilleurs/journal/conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="/sdcard/Meilleurs/ContactFrom_v17/index.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="/sdcard/Meilleurs/profiles/franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div>
+</body>
+<script src="/sdcard/Meilleurs/main.js"></script >
+</HTML>
