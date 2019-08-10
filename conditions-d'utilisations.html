@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+
+<meta name="author" content="Frankline Chisom">
+<title>Coronation du chef des chasseurs du Canton de Madaoua</title>
+<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/main.css">
+<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/glitch.css">
+	<link rel="stylesheet" href="/sdcard/Meilleurs/profiles/profile.css">
+	<link rel="stylesheet" href="/sdcard/Meilleurs/journal/journal.css">
+<script src="/sdcard/Meilleurs/profiles/main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init(); initi();" >
+<div class="phonedisplay">    
+<div class=" ">
+<div class="head"><canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div><div class ="head2"><br /> <br/><br/> <br /><br /><br/><br/>
+     <div class="glitch" data-text="bouzazois">bouzazois</div>
+
+
+
+
+           
+<div class="card">
+	<div class="title">Conditions d'utilisation du site.</div>
+	<br/><div><span class="author">Version 1.0 <br/> Mise à jour 15 Août 2019</span></div><br/><br/><div class="blogcont" style="text-indent:0px;">
+	Le site Web de Bouzazois situé à l'adresse https://bouzazois.tk et https://bouzazois.ml est une œuvre protégée par le droit d'auteur appartenant à Bouzazois. Certaines fonctionnalités du site peuvent être soumises à des directives, conditions ou règles supplémentaires, qui seront publiées sur le site en relation avec ces fonctionnalités.
+
+Tous ces termes, directives et règles supplémentaires sont incorporés par référence dans les présentes Conditions.
+
+Ces conditions d'utilisation décrivent les conditions juridiquement contraignantes régissant votre utilisation du site. En vous connectant au site, vous reconnaissez que ces conditions sont respectées et vous déclarez que vous disposez de l'autorité et de la capacité nécessaires pour souscrire à ces conditions. SI VOUS N'ÊTES PAS D'ACCORD AVEC TOUTES LES DISPOSITIONS DE CES CONDITIONS, NE CONNECTEZ-VOUS PAS ET / OU N'UTILISEZ PAS LE SITE.
+
+
+<h4>Accéder au site</h4>
+
+Sous réserve de ces conditions. La société vous accorde une licence limitée, non transférable, non exclusive, révocable et permettant d'accéder au site uniquement à des fins personnelles et non commerciales.
+
+<h4>Certaines restrictions. </h4>Les droits qui vous ont été approuvés dans les présentes Conditions sont soumis aux restrictions suivantes: (a) vous ne pouvez pas vendre, louer, céder à bail, céder, transférer, distribuer, héberger ou exploiter de quelque manière que ce soit le Site; (b) vous ne devez pas modifier, créer des œuvres dérivées, désassembler, décompiler ou désosser toute partie du site; (c) vous ne devez pas accéder au site afin de créer un site Web similaire ou concurrentiel; et (d) sauf disposition expresse des présentes, aucune partie du site ne peut être copiée, reproduite, distribuée, republiée, téléchargée, affichée, postée ou transmise sous quelque forme ou par quelque moyen que ce soit, sauf indication contraire, toute publication future, mise à jour ou les autres ajouts aux fonctionnalités du site sont soumis aux présentes conditions. Tous les avis de droits d'auteur et autres avis de propriété sur le site doivent être conservés sur toutes les copies de ceux-ci.
+
+La société se réserve le droit de modifier, suspendre ou suspendre le site avec ou sans préavis. Vous avez approuvé le fait que la société ne sera pas tenue responsable envers vous ou un tiers pour tout changement, interruption ou résiliation du site ou de toute partie de celui-ci.
+
+Pas de support ou de maintenance. Vous acceptez que la société n'aura aucune obligation de vous fournir une quelconque assistance en rapport avec le site.
+
+En excluant tout contenu utilisateur que vous pouvez fournir, vous savez que tous les droits de propriété intellectuelle, y compris les droits d’auteur, les brevets, les marques commerciales et les secrets commerciaux, sur le site et son contenu appartiennent aux fournisseurs de la société ou de la société. Notez que ces Conditions et l'accès au Site ne vous confèrent aucun droit, titre ou intérêt dans aucun droit de propriété intellectuelle, à l'exception des droits d'accès limités énoncés à la Section 2.1. La société et ses fournisseurs se réservent tous les droits non accordés dans les présentes conditions.
+
+ <h4>   Contenu de l'utilisateur. </h4>  "Contenu de l'utilisateur" désigne toutes les informations et tous les contenus qu'un utilisateur envoie au site. Vous êtes exclusivement responsable de votre contenu utilisateur. Vous supportez tous les risques liés à l'utilisation de votre contenu utilisateur. Vous certifiez par la présente que votre contenu d'utilisateur ne viole pas notre politique d'utilisation acceptable. Vous ne pouvez pas représenter ou impliquer à des tiers que votre contenu d'utilisateur est fourni, sponsorisé ou approuvé de quelque manière que ce soit par la société. Étant donné que vous êtes seul responsable de votre contenu d'utilisateur, vous pouvez vous exposer à une responsabilité. La société n’est pas obligée de sauvegarder le contenu utilisateur que vous publiez; De plus, votre contenu d'utilisateur peut être supprimé à tout moment sans préavis. Vous êtes seul responsable de la création de vos propres copies de sauvegarde de votre contenu utilisateur si vous le souhaitez.  
+
+  Par la présente, vous accordez à la société une licence mondiale irréversible, non exclusive, sans redevance et entièrement payée, pour la reproduction, la distribution, l'affichage public et la performance, la préparation d'œuvres dérivées, l'intégration à d'autres œuvres et l'utilisation et l'exploitation du contenu de l'utilisateur. et d’accorder des sous-licences des droits qui précèdent, uniquement à des fins d’inclusion de votre contenu d’utilisateur sur le site. Par la présente, vous renoncez de manière irréversible à toute réclamation ou affirmation de droit moral ou d’attribution à l’égard de votre contenu d’utilisateur.  
+
+  <h4>  Règles d'utilisation acceptable. </h4>  Les termes suivants constituent notre "Règles d'utilisation acceptable":
+Vous acceptez de ne pas utiliser le site pour collecter, télécharger, transmettre, afficher ou distribuer un contenu d'utilisateur qui (i) enfreint un droit d'un tiers, une propriété intellectuelle ou un droit de propriété; (ii) illégal, harcelant, abusif, délictueux, menaçant, préjudiciable, envahissant la vie privée d'autrui, vulgaire, diffamatoire, faux, intentionnellement trompeur, commerçant calomnieux, pornographique, obscène, manifestement offensant, promeut le racisme, le sectarisme, la haine, ou préjudice de quelque nature que ce soit contre un groupe ou un individu; (iii) nuisible aux mineurs de quelque manière que ce soit; ou (iv) enfreignant une loi, un règlement, des obligations ou des restrictions imposées par un tiers.  
+
+  En outre, vous vous engagez à ne pas: (i) télécharger, transmettre ou distribuer sur ou via le site des logiciels destinés à endommager ou à altérer un système informatique ou des données; (ii) envoyer via le Site des publicités non sollicitées ou non autorisées, du matériel promotionnel, des courriers indésirables, des spams, des chaînes de lettres, des pyramides ou toute autre forme de message dupliqué ou non sollicité; (iii) utiliser le Site pour collecter, rassembler ou assembler des informations ou données concernant d'autres utilisateurs sans leur consentement; (iv) interférer avec, perturber ou créer une charge excessive pour les serveurs ou les réseaux connectés au site, ou enfreindre les réglementations, politiques ou procédures de ces réseaux; (v) tenter d'obtenir un accès non autorisé au site, que ce soit par l'extraction de mots de passe ou par tout autre moyen; (vi) harceler ou interférer avec l’utilisation et la jouissance du Site par un autre utilisateur; ou (vi) utiliser un logiciel, des agents automatisés ou des scripts pour créer plusieurs comptes sur le site ou pour générer des recherches, requêtes ou requêtes automatisées sur le site.  
+
+  Nous nous réservons le droit de réviser tout contenu d'utilisateur et d'enquêter et / ou de prendre les mesures appropriées à votre encontre, à notre seule discrétion, si vous enfreignez la politique d'utilisation acceptable ou toute autre disposition des présentes conditions, ou créez autrement une responsabilité pour nous ou toute autre personne. Ces actions peuvent inclure la suppression ou la modification de votre contenu utilisateur, la résiliation de votre compte conformément à la section 8 et / ou le signalement des autorités chargées de l'application de la loi.  
+    
+  Si vous transmettez à la société des commentaires ou des suggestions concernant le site, vous cédez à la société tous les droits sur ces commentaires et acceptez que la société ait le droit d'utiliser et d'exploiter pleinement ces commentaires et informations connexes de la manière qu'elle juge appropriée. . La société traitera les commentaires que vous lui fournirez comme non confidentiels et non exclusifs.  
+
+  Vous vous engagez à indemniser et à tenir la société, ainsi que ses dirigeants, employés et mandataires, exempts de toute réclamation ou demande formulée par un tiers en raison ou en raison de (a) votre utilisation de le site, (b) votre violation des présentes conditions, (c) votre violation des lois ou réglementations applicables ou (d) votre contenu d'utilisateur. La société se réserve le droit d'assumer la défense et le contrôle exclusifs de toute affaire pour laquelle vous devez nous indemniser, et vous acceptez de coopérer à notre défense de ces revendications. Vous acceptez de ne régler aucune affaire sans le consentement écrit préalable de la société. La société déploiera des efforts raisonnables pour vous informer de telles réclamations, actions ou procédures dès qu'elle en aura connaissance.  
+  <h3>Liens tiers et annonces; Autres utilisateurs </h3>
+
+ <h4>   Liens et annonces de tiers.</h4>   Le site peut contenir des liens vers des sites Web et des services tiers et / ou afficher des publicités pour des tiers. Ces liens et annonces de tiers ne sont pas sous le contrôle de la société, et la société n'est pas responsable des liens et des annonces de tiers. La société fournit un accès à ces liens et annonces de tiers uniquement pour votre commodité et ne pas examiner, approuver, surveiller, approuver, garantir ou faire aucune déclaration en ce qui concerne les liens et les annonces de tiers. Vous utilisez tous les liens et toutes les publicités à vos risques et périls, et vous devez faire preuve de la plus grande prudence et du moins discrétionnaire. Lorsque vous cliquez sur l'un des liens et des annonces tierces, les conditions et politiques du tiers applicable s'appliquent, y compris les pratiques de ce tiers en matière de confidentialité et de collecte de données.  
+
+   <h4> Autres utilisateurs.  </h4> Chaque utilisateur du site est seul responsable du contenu de son contenu. Parce que nous ne contrôlons pas le contenu de l'utilisateur, vous reconnaissez et acceptez que nous ne sommes pas responsables de tout contenu de l'utilisateur, qu'il soit fourni par vous ou par d'autres. Vous acceptez que la société ne sera pas responsable des pertes ou des dommages résultant de telles interactions. En cas de litige entre vous et un utilisateur du site, nous ne sommes aucunement tenus de participer.  
+
+  Par la présente, vous libérez et libérez à jamais la Société et nos dirigeants, employés, agents, successeurs et mandataires de, et par la présente, renoncez et renoncez à chaque différend, réclamation, revendication, droit, obligation passé, présent et futur. , responsabilité, action et cause d'action de toute sorte et de toute nature, résultant directement ou indirectement de la création du Site ou ayant une relation directe ou indirecte avec ce Site.
+
+
+ <!--   Cookie Google DoubleClick DART.   Google est l'un des fournisseurs tiers sur notre site. Il utilise également des cookies, appelés cookies DART, pour diffuser des annonces aux visiteurs de notre site en fonction de leur visite sur www.website.com et d'autres sites sur Internet. Toutefois, les visiteurs peuvent choisir de refuser l'utilisation des cookies DART en se rendant dans les règles de confidentialité de Google relatives aux annonces et au réseau de contenu, à l'adresse suivante: <a href="https://policies.google.com/technologies/ads"> https: / /policies.google.com/technologies/ads </a>  
+
+    Nos partenaires publicitaires.   Certains annonceurs de notre site peuvent utiliser des cookies et des balises Web. Nos partenaires publicitaires sont listés ci-dessous. Chacun de nos partenaires publicitaires a sa propre politique de confidentialité pour ses politiques sur les données des utilisateurs. Pour faciliter l'accès, nous avons créé un lien hypertexte vers les règles de confidentialité ci-dessous.  
+
+
+     
+          Google  
+          <a href="https://policies.google.com/technologies/ads"> https://policies.google.com/technologies/ads </a>   
+     
+
+  Avertissements 
+-->
+  Le site est fourni "en l'état" et "selon disponibilité", et la société et nos fournisseurs déclinent expressément toute garantie, condition de quelque nature que ce soit, expresse, implicite ou légale, y compris toutes les garanties ou conditions de qualité marchande, d’adéquation à un usage particulier, de titre, de jouissance paisible, de précision ou d’absence de contrefaçon. Nous et nos fournisseurs ne garantissons pas que le site répondra à vos exigences, sera disponible sur une base ininterrompue, opportune, sécurisée ou sans erreur, ou sera précis, fiable, exempt de virus ou autre code nuisible, complet, légal ou en toute sécurité. Si la loi applicable impose des garanties sur le site, leur durée est limitée à quatre-vingt-dix (90) jours à compter de la date de leur première utilisation.  
+
+  Certaines juridictions n'autorisant pas l'exclusion de garanties implicites, il est possible que l'exclusion ci-dessus ne s'applique pas à vous. Certaines juridictions n'autorisent pas de limitation de la durée d'une garantie implicite. Il est donc possible que la limitation ci-dessus ne vous concerne pas.  
+
+ <h4> Limitation de responsabilité </h4>
+
+  Dans toute la mesure permise par la loi, en aucun cas la société ou nos fournisseurs ne peuvent être tenus responsables envers vous ou tout tiers des pertes de bénéfices, des données perdues, des coûts d’achat de produits de substitution, ou de tout exemple indirect, consécutif , dommages accessoires, spéciaux ou punitifs découlant de ou liés à ces termes ou à votre utilisation de, ou incapacité à utiliser le site même si la société a été informée de la possibilité de tels dommages. L’accès au site et son utilisation se font à vos risques et périls et vous serez seul responsable de tout dommage causé à votre appareil ou à votre système informatique, ou à la perte de données en résultant.  
+
+  Dans toute la mesure permise par la loi, nonobstant toute disposition contraire des présentes, notre responsabilité à l’égard des dommages résultant ou liés au présent contrat sera en tout temps limitée à un maximum de cinq dollars américains (5 USD). ). L'existence de plusieurs revendications n'élargira pas cette limite. Vous convenez que nos fournisseurs n’auront aucune responsabilité de quelque nature que ce soit découlant de ou liée à cet accord.  
+
+  Certaines juridictions n'autorisant pas la limitation ou l'exclusion de responsabilité pour dommages indirects ou consécutifs, la limitation ou exclusion ci-dessus peut ne pas s'appliquer à vous.  
+   <h4> Terme et résiliation.  </h4> Sous réserve de cette section, les présentes conditions resteront pleinement en vigueur tant que vous utiliserez le site. Nous pouvons suspendre ou résilier vos droits d'utilisation du site à tout moment pour quelque raison que ce soit, à notre seule discrétion, y compris pour toute utilisation du site en violation des présentes conditions. À la résiliation de vos droits en vertu des présentes conditions, votre compte et votre droit d'accéder au site et de l'utiliser seront résiliés immédiatement. Vous comprenez que toute résiliation de votre compte peut impliquer la suppression de votre contenu utilisateur associé à votre compte de nos bases de données actives. La société décline toute responsabilité à l’égard de la résiliation de vos droits en vertu des présentes conditions. Même après la résiliation de vos droits en vertu des présentes Conditions, les dispositions suivantes de ces Conditions resteront en vigueur: sections 2 à 2.5, section 3 et sections 4 à 10.  
+
+  <h4>Règles de droits d'auteur. </h4>
+
+  La société respecte la propriété intellectuelle d'autrui et demande aux utilisateurs de notre site de faire de même. En ce qui concerne notre site, nous avons adopté et mis en œuvre une politique relative au droit d'auteur qui prévoit la suppression de tout matériel illicite et le licenciement des utilisateurs de notre site en ligne qui enfreignent de manière répétée les droits de propriété intellectuelle, y compris les droits d'auteur. Si vous pensez que l'un de nos utilisateurs enfreint illégalement le (s) droit (s) d'auteurs sur une œuvre par le biais de notre site et souhaitez faire retirer le contenu prétendument illicite, les informations suivantes, sous la forme d'une notification écrite à 17 USC § 512 (c)) doivent être fournis à notre agent de protection des droits d'auteur désigné:  
+
+<ul>
+    <li>  votre signature physique ou électronique;  </li>
+     <li> l'identification de la ou des œuvres protégées par le droit d'auteur que vous prétendez avoir été enfreintes;</li>  
+    <li>  l'identification du contenu de nos services que vous déclarez contrefait et que vous nous demandez de supprimer;  </li>
+     <li> informations suffisantes pour nous permettre de localiser un tel matériel;  </li>
+     <li> votre adresse, votre numéro de téléphone et votre adresse électronique; </li> 
+    <li>  une déclaration selon laquelle vous croyez de bonne foi que l’utilisation du contenu répréhensible n’est pas autorisée par le propriétaire des droits d’auteur, son mandataire ou en vertu de la loi; </li>
+    <li>
+	
+et une déclaration selon laquelle les informations figurant dans la notification sont exactes et sous peine de parjure, selon lesquelles vous êtes soit le titulaire du droit d'auteur qui aurait été violé, soit vous êtes autorisé à agir au nom du titulaire du droit d'auteur.  </li></ul>
+
+  Veuillez noter que, conformément à 17 États-Unis d’Amérique. § 512 (f), toute déclaration inexacte de faits importants dans une notification écrite engage automatiquement la responsabilité de la partie plaignante pour les dommages, coûts et frais d’avocat supportés par nous dans le cadre de la notification écrite et de l’allégation de violation du droit d'auteur.  
+
+  <h4>Général </h4>
+
+  Ces conditions sont soumises à des révisions occasionnelles. Si nous apportons des modifications substantielles, nous pourrons vous en informer en vous envoyant un e-mail à la dernière adresse e-mail que vous nous avez fournie et / ou en publiant un avis de changements sur notre site. Vous êtes responsable de nous fournir votre adresse e-mail la plus récente. Dans le cas où la dernière adresse e-mail que vous nous avez fournie n'est pas valide, l'envoi de l'e-mail contenant cet avis constituera néanmoins un avis effectif des modifications décrites dans l'avis. Toute modification de ces conditions entrera en vigueur au plus tôt sept (7) jours calendaires après l'envoi de votre notification par courrier électronique ou sept (7) jours calendaires après notre publication de l'avis de modification sur notre site. Ces modifications entreront en vigueur immédiatement pour les nouveaux utilisateurs de notre site. L'utilisation continue de notre site après la notification de telles modifications indiquera votre reconnaissance de ces modifications et votre consentement à être lié par les termes et conditions de ces modifications.
+<h4>Résolution de litige.</h4> 
+Veuillez lire attentivement cette convention d'arbitrage. Cela fait partie de votre contrat avec la société et affecte vos droits. Il contient des procédures pour l’ARBITAGE OBLIGATOIRE ET UNE RENONCIATION AUX ACTIONS CLASSES.  
+
+   <h4> Applicabilité du contrat d'arbitrage. </h4>  
+Toutes les réclamations et tous les différends liés aux Conditions d'utilisation ou à l'utilisation d'un produit ou d'un service fourni par la Société qui ne peut être résolu de manière informelle ou par une cour des petites créances doivent être résolus par arbitrage obligatoire sur une base individuelle selon les termes de la présente convention d'arbitrage. Sauf convention contraire, toutes les procédures d’arbitrage se déroulent en français. La présente convention d'arbitrage s'applique à vous et à la Société, ainsi qu'à toutes les filiales, sociétés affiliées, mandataires, employés, prédécesseurs ayant un intérêt, successeurs et ayants droit, ainsi qu'à tous les utilisateurs ou bénéficiaires autorisés ou non des services ou biens fournis conformément aux conditions.
+
+<h4>    Préavis et résolution informelle des litiges.   </h4>
+Avant que l'une ou l'autre des parties ne demande un arbitrage, elle doit d'abord envoyer à l'autre partie un avis de différend écrit décrivant la nature et le fondement de la plainte ou du différend, et le soulagement demandé. Un avis à la société doit être envoyé à: franklinechisom96@gmail.com Après réception de la notification, vous et la société pouvez tenter de résoudre la réclamation ou le différend de manière informelle. Si vous et la société ne résolvez pas la réclamation ou le différend dans les trente (30) jours suivant la réception de la notification, l'une ou l'autre des parties peut entamer une procédure d'arbitrage. Le montant d'une offre de règlement faite par une partie ne peut être divulgué à l'arbitre qu'après que celui-ci a déterminé le montant de la sentence à laquelle l'une ou l'autre des parties a droit.  
+
+    <h4>Règles supplémentaires applicables à l'arbitrage sans comparution.  </h4> Si un arbitrage sans comparution est choisi, l'arbitrage doit être effectué par téléphone, en ligne et / ou uniquement sur la base de soumissions écrites. la manière spécifique est choisie par la partie qui a lancé l'arbitrage. L'arbitrage n'implique aucune comparution personnelle de la part des parties ou des témoins, à moins que les parties n'en conviennent autrement.  
+
+
+   
+   <h4> Renonciation au procès devant jury.  </h4> Les parties renoncent à leurs droits constitutionnels et législatifs de saisir le tribunal et ont la possibilité de faire comparaître devant un juge ou un jury. résolus par arbitrage en vertu de la présente convention d'arbitrage. Les procédures d’arbitrage sont généralement plus limitées, plus efficaces et moins onéreuses que les règles applicables aux tribunaux et ne sont soumises qu’à un contrôle très limité. Dans l'éventualité d'un litige entre vous et la société devant un tribunal d'État ou fédéral dans le cadre d'une action en annulation ou en exécution d'une sentence arbitrale ou autrement, VOUS ET LA SOCIÉTÉ RENONCEZ À TOUS LES DROITS À UN PROCÈS EN JURY, mais choisissez plutôt que le litige soit résolu par un juge.  
+
+<h4>    Renonciation à des recours collectifs ou globaux. </h4>  Toutes les réclamations et tous les différends relevant de la présente convention d'arbitrage doivent faire l'objet d'un arbitrage ou d'une procédure judiciaire sur une base individuelle et non sur la base d'un recours collectif. Le client ou l'utilisateur ne peut pas être arbitré ou plaidé conjointement ou consolidé avec ceux d'un autre client ou utilisateur.  
+
+  <h4>  Confidentialité.  </h4> Tous les aspects de la procédure d'arbitrage sont strictement confidentiels. Les parties conviennent de maintenir la confidentialité sauf si la loi l'exige autrement. Le présent paragraphe n'empêche pas une partie de soumettre à un tribunal des informations nécessaires à l'exécution du présent accord, à l'exécution d'une sentence arbitrale ou à la demande d'un redressement injonctif ou équitable.  
+
+   <h4> Divisibilité.  </h4> Si une partie de la présente convention d'arbitrage est déclarée invalide ou inapplicable par un tribunal compétent, cette partie ou ces parties spécifiques seront alors inopérantes et inopérantes effectivement et sera dissocié et le reste de l'accord restera en vigueur et de plein effet.  
+
+ <h4>   Droit de renonciation. </h4>  La partie contre laquelle la réclamation est revendiquée peut renoncer à tout ou partie des droits et limitations énoncés dans le présent contrat d'arbitrage. Une telle renonciation ne renonce ni n'affecte aucune autre partie de la présente convention d'arbitrage.  
+
+    <h4>Maintien de l'accord. </h4>  Cet accord d'arbitrage survivra à la résiliation de votre relation avec la société.  
+
+   <h4> Cour des petites créances.  </h4> Néanmoins, vous ou la société pouvez engager une action individuelle devant la cour des petites créances.  
+
+   <h4> Allégement d'urgence équitable.  </h4> Quoi qu'il en soit, l'une ou l'autre des parties peut demander un redressement équitable devant un tribunal afin de maintenir le statu quo en attendant l'arbitrage. Une demande de mesures provisoires ne sera pas considérée comme une renonciation à d’autres droits ou obligations en vertu du présent accord d’arbitrage.  
+
+   <h4> Revendications non sujettes à arbitrage.</h4>   Nonobstant ce qui précède, les allégations de diffamation, de violation de la loi relative à la fraude et aux abus informatiques, ainsi que de violation ou d'appropriation illicite du brevet, du droit d'auteur, de la marque ou des secrets commerciaux de l'autre partie ne pas être soumis à la présente convention d'arbitrage.  
+
+  Dans les cas où la convention d'arbitrage ci-dessus permet aux parties de plaider en justice, les parties acceptent de se soumettre à la juridiction personnelle des tribunaux situés dans le comté de Niamey, au Niger, à cette fin.  
+
+  Le site peut être soumis à la législation nigérienne en matière de contrôle des exportations et aux réglementations en matière d’exportation ou d’importation en vigueur dans d’autres pays. Vous vous engagez à ne pas exporter, réexporter ou transférer, directement ou indirectement, les données techniques nigériennes acquises auprès de la société, ni aucun produit utilisant ces données, en violation des lois ou réglementations nigériennes en matière d'exportation.  
+
+ 
+
+    Communications électroniques.   Les communications que vous entretenez avec la société utilisent des moyens électroniques, que vous utilisiez ou envoyiez des courriers électroniques, que la société publie des notifications sur le site ou communique avec vous par courrier électronique. À des fins contractuelles, vous (a) consentez à recevoir des communications de la société sous forme électronique; et (b) convenez que tous les termes, conditions, accords, avis, divulgations et autres communications que la Société vous fournit par voie électronique satisfont à toute obligation légale que de telles communications satisferaient si elles étaient écrites sur support papier.  
+
+   <h4> Conditions complètes.  </h4> Les présentes conditions constituent l'intégralité de l'accord entre vous et nous concernant l'utilisation du site. Notre incapacité à exercer ou à appliquer tout droit ou toute disposition de ces Conditions ne constitue pas une renonciation à ce droit ou à cette disposition. Les titres de section dans ces Conditions générales sont fournis à titre indicatif uniquement et n’ont aucun effet juridique ou contractuel. Le mot "y compris" signifie "y compris sans limitation". Si une disposition de ces Conditions est jugée invalide ou inapplicable, les autres dispositions de ces Conditions ne seront pas altérées et la disposition invalide ou inapplicable sera réputée modifiée afin qu'elle soit valide et exécutable dans les limites autorisées par la loi. Votre relation avec la société est celle d'un entrepreneur indépendant et aucune des parties n'est un agent ou un partenaire de l'autre. Ces Conditions, ainsi que vos droits et obligations, ne peuvent être cédés, sous-traités, délégués ou autrement transférés par vous sans le consentement écrit préalable de la Société, et toute tentative de cession, de sous-traitance, de délégation ou de transfert en violation de ce qui précède sera nulle et non avenue. vide. La société peut librement attribuer ces conditions. Les conditions énoncées dans les présentes conditions lient les cessionnaires.  
+
+  
+    Informations sur les droits d'auteur / marques de commerce.   Copyright ©. Tous les droits sont réservés. Toutes les marques, logos et marques de service affichés sur le site sont notre propriété ou la propriété d'autres tiers. Vous n'êtes pas autorisé à utiliser ces marques sans notre consentement écrit préalable ou le consentement du tiers qui en est propriétaire.  <br/>
+
+<h4>  Informations de contact </h4>
+
+ <b>Adresse:</b><br/>  Niamey Niger  <br/><br/>
+ <b>Email: </b><br/> franklinechisom96@gmail.com
+ 
+ </div>  </div> <br/><br/>
+ 
+    
+<div class="footer  "><br/>
+	<div class="spons">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="/sdcard/Meilleurs/journal/conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:46px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="/sdcard/Meilleurs/ContactFrom_v17/index.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="/sdcard/Meilleurs/profiles/franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div>
+</div>
+
+</div>
+
+<!-- compdisplay -->
+
+
+
+
+
+
+
+<div class="compdisplay">     
+<div class=" ">   
+<div class=" ">
+<div class="headcomp"><canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<10;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div><div class ="head2comp" style="height:180px;"><br />
+     <div class="glitchi" data-text="bouzazois">bouzazois</div><br /><br /><br /><br /><br/>
+
+<div style="width:80%; margin-left:10%;">
+
+           
+<div class="card">
+	<div class="title">Conditions d'utilisation du site.</div>
+	<br/><div><span class="author">Version 1.0 <br/> Mise à jour 15 Août 2019</span></div><br/><br/><div class="blogcont" style="text-indent:0px;">
+	Le site Web de Bouzazois situé à l'adresse https://bouzazois.tk et https://bouzazois.ml est une œuvre protégée par le droit d'auteur appartenant à Bouzazois. Certaines fonctionnalités du site peuvent être soumises à des directives, conditions ou règles supplémentaires, qui seront publiées sur le site en relation avec ces fonctionnalités.
+
+Tous ces termes, directives et règles supplémentaires sont incorporés par référence dans les présentes Conditions.
+
+Ces conditions d'utilisation décrivent les conditions juridiquement contraignantes régissant votre utilisation du site. En vous connectant au site, vous reconnaissez que ces conditions sont respectées et vous déclarez que vous disposez de l'autorité et de la capacité nécessaires pour souscrire à ces conditions. SI VOUS N'ÊTES PAS D'ACCORD AVEC TOUTES LES DISPOSITIONS DE CES CONDITIONS, NE CONNECTEZ-VOUS PAS ET / OU N'UTILISEZ PAS LE SITE.
+
+
+<h4>Accéder au site</h4>
+
+Sous réserve de ces conditions. La société vous accorde une licence limitée, non transférable, non exclusive, révocable et permettant d'accéder au site uniquement à des fins personnelles et non commerciales.
+
+<h4>Certaines restrictions. </h4>Les droits qui vous ont été approuvés dans les présentes Conditions sont soumis aux restrictions suivantes: (a) vous ne pouvez pas vendre, louer, céder à bail, céder, transférer, distribuer, héberger ou exploiter de quelque manière que ce soit le Site; (b) vous ne devez pas modifier, créer des œuvres dérivées, désassembler, décompiler ou désosser toute partie du site; (c) vous ne devez pas accéder au site afin de créer un site Web similaire ou concurrentiel; et (d) sauf disposition expresse des présentes, aucune partie du site ne peut être copiée, reproduite, distribuée, republiée, téléchargée, affichée, postée ou transmise sous quelque forme ou par quelque moyen que ce soit, sauf indication contraire, toute publication future, mise à jour ou les autres ajouts aux fonctionnalités du site sont soumis aux présentes conditions. Tous les avis de droits d'auteur et autres avis de propriété sur le site doivent être conservés sur toutes les copies de ceux-ci.
+
+La société se réserve le droit de modifier, suspendre ou suspendre le site avec ou sans préavis. Vous avez approuvé le fait que la société ne sera pas tenue responsable envers vous ou un tiers pour tout changement, interruption ou résiliation du site ou de toute partie de celui-ci.
+
+Pas de support ou de maintenance. Vous acceptez que la société n'aura aucune obligation de vous fournir une quelconque assistance en rapport avec le site.
+
+En excluant tout contenu utilisateur que vous pouvez fournir, vous savez que tous les droits de propriété intellectuelle, y compris les droits d’auteur, les brevets, les marques commerciales et les secrets commerciaux, sur le site et son contenu appartiennent aux fournisseurs de la société ou de la société. Notez que ces Conditions et l'accès au Site ne vous confèrent aucun droit, titre ou intérêt dans aucun droit de propriété intellectuelle, à l'exception des droits d'accès limités énoncés à la Section 2.1. La société et ses fournisseurs se réservent tous les droits non accordés dans les présentes conditions.
+
+ <h4>   Contenu de l'utilisateur. </h4>  "Contenu de l'utilisateur" désigne toutes les informations et tous les contenus qu'un utilisateur envoie au site. Vous êtes exclusivement responsable de votre contenu utilisateur. Vous supportez tous les risques liés à l'utilisation de votre contenu utilisateur. Vous certifiez par la présente que votre contenu d'utilisateur ne viole pas notre politique d'utilisation acceptable. Vous ne pouvez pas représenter ou impliquer à des tiers que votre contenu d'utilisateur est fourni, sponsorisé ou approuvé de quelque manière que ce soit par la société. Étant donné que vous êtes seul responsable de votre contenu d'utilisateur, vous pouvez vous exposer à une responsabilité. La société n’est pas obligée de sauvegarder le contenu utilisateur que vous publiez; De plus, votre contenu d'utilisateur peut être supprimé à tout moment sans préavis. Vous êtes seul responsable de la création de vos propres copies de sauvegarde de votre contenu utilisateur si vous le souhaitez.  
+
+  Par la présente, vous accordez à la société une licence mondiale irréversible, non exclusive, sans redevance et entièrement payée, pour la reproduction, la distribution, l'affichage public et la performance, la préparation d'œuvres dérivées, l'intégration à d'autres œuvres et l'utilisation et l'exploitation du contenu de l'utilisateur. et d’accorder des sous-licences des droits qui précèdent, uniquement à des fins d’inclusion de votre contenu d’utilisateur sur le site. Par la présente, vous renoncez de manière irréversible à toute réclamation ou affirmation de droit moral ou d’attribution à l’égard de votre contenu d’utilisateur.  
+
+  <h4>  Règles d'utilisation acceptable. </h4>  Les termes suivants constituent notre "Règles d'utilisation acceptable":
+Vous acceptez de ne pas utiliser le site pour collecter, télécharger, transmettre, afficher ou distribuer un contenu d'utilisateur qui (i) enfreint un droit d'un tiers, une propriété intellectuelle ou un droit de propriété; (ii) illégal, harcelant, abusif, délictueux, menaçant, préjudiciable, envahissant la vie privée d'autrui, vulgaire, diffamatoire, faux, intentionnellement trompeur, commerçant calomnieux, pornographique, obscène, manifestement offensant, promeut le racisme, le sectarisme, la haine, ou préjudice de quelque nature que ce soit contre un groupe ou un individu; (iii) nuisible aux mineurs de quelque manière que ce soit; ou (iv) enfreignant une loi, un règlement, des obligations ou des restrictions imposées par un tiers.  
+
+  En outre, vous vous engagez à ne pas: (i) télécharger, transmettre ou distribuer sur ou via le site des logiciels destinés à endommager ou à altérer un système informatique ou des données; (ii) envoyer via le Site des publicités non sollicitées ou non autorisées, du matériel promotionnel, des courriers indésirables, des spams, des chaînes de lettres, des pyramides ou toute autre forme de message dupliqué ou non sollicité; (iii) utiliser le Site pour collecter, rassembler ou assembler des informations ou données concernant d'autres utilisateurs sans leur consentement; (iv) interférer avec, perturber ou créer une charge excessive pour les serveurs ou les réseaux connectés au site, ou enfreindre les réglementations, politiques ou procédures de ces réseaux; (v) tenter d'obtenir un accès non autorisé au site, que ce soit par l'extraction de mots de passe ou par tout autre moyen; (vi) harceler ou interférer avec l’utilisation et la jouissance du Site par un autre utilisateur; ou (vi) utiliser un logiciel, des agents automatisés ou des scripts pour créer plusieurs comptes sur le site ou pour générer des recherches, requêtes ou requêtes automatisées sur le site.  
+
+  Nous nous réservons le droit de réviser tout contenu d'utilisateur et d'enquêter et / ou de prendre les mesures appropriées à votre encontre, à notre seule discrétion, si vous enfreignez la politique d'utilisation acceptable ou toute autre disposition des présentes conditions, ou créez autrement une responsabilité pour nous ou toute autre personne. Ces actions peuvent inclure la suppression ou la modification de votre contenu utilisateur, la résiliation de votre compte conformément à la section 8 et / ou le signalement des autorités chargées de l'application de la loi.  
+    
+  Si vous transmettez à la société des commentaires ou des suggestions concernant le site, vous cédez à la société tous les droits sur ces commentaires et acceptez que la société ait le droit d'utiliser et d'exploiter pleinement ces commentaires et informations connexes de la manière qu'elle juge appropriée. . La société traitera les commentaires que vous lui fournirez comme non confidentiels et non exclusifs.  
+
+  Vous vous engagez à indemniser et à tenir la société, ainsi que ses dirigeants, employés et mandataires, exempts de toute réclamation ou demande formulée par un tiers en raison ou en raison de (a) votre utilisation de le site, (b) votre violation des présentes conditions, (c) votre violation des lois ou réglementations applicables ou (d) votre contenu d'utilisateur. La société se réserve le droit d'assumer la défense et le contrôle exclusifs de toute affaire pour laquelle vous devez nous indemniser, et vous acceptez de coopérer à notre défense de ces revendications. Vous acceptez de ne régler aucune affaire sans le consentement écrit préalable de la société. La société déploiera des efforts raisonnables pour vous informer de telles réclamations, actions ou procédures dès qu'elle en aura connaissance.  
+  <h3>Liens tiers et annonces; Autres utilisateurs </h3>
+
+ <h4>   Liens et annonces de tiers.</h4>   Le site peut contenir des liens vers des sites Web et des services tiers et / ou afficher des publicités pour des tiers. Ces liens et annonces de tiers ne sont pas sous le contrôle de la société, et la société n'est pas responsable des liens et des annonces de tiers. La société fournit un accès à ces liens et annonces de tiers uniquement pour votre commodité et ne pas examiner, approuver, surveiller, approuver, garantir ou faire aucune déclaration en ce qui concerne les liens et les annonces de tiers. Vous utilisez tous les liens et toutes les publicités à vos risques et périls, et vous devez faire preuve de la plus grande prudence et du moins discrétionnaire. Lorsque vous cliquez sur l'un des liens et des annonces tierces, les conditions et politiques du tiers applicable s'appliquent, y compris les pratiques de ce tiers en matière de confidentialité et de collecte de données.  
+
+   <h4> Autres utilisateurs.  </h4> Chaque utilisateur du site est seul responsable du contenu de son contenu. Parce que nous ne contrôlons pas le contenu de l'utilisateur, vous reconnaissez et acceptez que nous ne sommes pas responsables de tout contenu de l'utilisateur, qu'il soit fourni par vous ou par d'autres. Vous acceptez que la société ne sera pas responsable des pertes ou des dommages résultant de telles interactions. En cas de litige entre vous et un utilisateur du site, nous ne sommes aucunement tenus de participer.  
+
+  Par la présente, vous libérez et libérez à jamais la Société et nos dirigeants, employés, agents, successeurs et mandataires de, et par la présente, renoncez et renoncez à chaque différend, réclamation, revendication, droit, obligation passé, présent et futur. , responsabilité, action et cause d'action de toute sorte et de toute nature, résultant directement ou indirectement de la création du Site ou ayant une relation directe ou indirecte avec ce Site.
+
+
+ <!--   Cookie Google DoubleClick DART.   Google est l'un des fournisseurs tiers sur notre site. Il utilise également des cookies, appelés cookies DART, pour diffuser des annonces aux visiteurs de notre site en fonction de leur visite sur www.website.com et d'autres sites sur Internet. Toutefois, les visiteurs peuvent choisir de refuser l'utilisation des cookies DART en se rendant dans les règles de confidentialité de Google relatives aux annonces et au réseau de contenu, à l'adresse suivante: <a href="https://policies.google.com/technologies/ads"> https: / /policies.google.com/technologies/ads </a>  
+
+    Nos partenaires publicitaires.   Certains annonceurs de notre site peuvent utiliser des cookies et des balises Web. Nos partenaires publicitaires sont listés ci-dessous. Chacun de nos partenaires publicitaires a sa propre politique de confidentialité pour ses politiques sur les données des utilisateurs. Pour faciliter l'accès, nous avons créé un lien hypertexte vers les règles de confidentialité ci-dessous.  
+
+
+     
+          Google  
+          <a href="https://policies.google.com/technologies/ads"> https://policies.google.com/technologies/ads </a>   
+     
+
+  Avertissements 
+-->
+  Le site est fourni "en l'état" et "selon disponibilité", et la société et nos fournisseurs déclinent expressément toute garantie, condition de quelque nature que ce soit, expresse, implicite ou légale, y compris toutes les garanties ou conditions de qualité marchande, d’adéquation à un usage particulier, de titre, de jouissance paisible, de précision ou d’absence de contrefaçon. Nous et nos fournisseurs ne garantissons pas que le site répondra à vos exigences, sera disponible sur une base ininterrompue, opportune, sécurisée ou sans erreur, ou sera précis, fiable, exempt de virus ou autre code nuisible, complet, légal ou en toute sécurité. Si la loi applicable impose des garanties sur le site, leur durée est limitée à quatre-vingt-dix (90) jours à compter de la date de leur première utilisation.  
+
+  Certaines juridictions n'autorisant pas l'exclusion de garanties implicites, il est possible que l'exclusion ci-dessus ne s'applique pas à vous. Certaines juridictions n'autorisent pas de limitation de la durée d'une garantie implicite. Il est donc possible que la limitation ci-dessus ne vous concerne pas.  
+
+ <h4> Limitation de responsabilité </h4>
+
+  Dans toute la mesure permise par la loi, en aucun cas la société ou nos fournisseurs ne peuvent être tenus responsables envers vous ou tout tiers des pertes de bénéfices, des données perdues, des coûts d’achat de produits de substitution, ou de tout exemple indirect, consécutif , dommages accessoires, spéciaux ou punitifs découlant de ou liés à ces termes ou à votre utilisation de, ou incapacité à utiliser le site même si la société a été informée de la possibilité de tels dommages. L’accès au site et son utilisation se font à vos risques et périls et vous serez seul responsable de tout dommage causé à votre appareil ou à votre système informatique, ou à la perte de données en résultant.  
+
+  Dans toute la mesure permise par la loi, nonobstant toute disposition contraire des présentes, notre responsabilité à l’égard des dommages résultant ou liés au présent contrat sera en tout temps limitée à un maximum de cinq dollars américains (5 USD). ). L'existence de plusieurs revendications n'élargira pas cette limite. Vous convenez que nos fournisseurs n’auront aucune responsabilité de quelque nature que ce soit découlant de ou liée à cet accord.  
+
+  Certaines juridictions n'autorisant pas la limitation ou l'exclusion de responsabilité pour dommages indirects ou consécutifs, la limitation ou exclusion ci-dessus peut ne pas s'appliquer à vous.  
+   <h4> Terme et résiliation.  </h4> Sous réserve de cette section, les présentes conditions resteront pleinement en vigueur tant que vous utiliserez le site. Nous pouvons suspendre ou résilier vos droits d'utilisation du site à tout moment pour quelque raison que ce soit, à notre seule discrétion, y compris pour toute utilisation du site en violation des présentes conditions. À la résiliation de vos droits en vertu des présentes conditions, votre compte et votre droit d'accéder au site et de l'utiliser seront résiliés immédiatement. Vous comprenez que toute résiliation de votre compte peut impliquer la suppression de votre contenu utilisateur associé à votre compte de nos bases de données actives. La société décline toute responsabilité à l’égard de la résiliation de vos droits en vertu des présentes conditions. Même après la résiliation de vos droits en vertu des présentes Conditions, les dispositions suivantes de ces Conditions resteront en vigueur: sections 2 à 2.5, section 3 et sections 4 à 10.  
+
+  <h4>Règles de droits d'auteur. </h4>
+
+  La société respecte la propriété intellectuelle d'autrui et demande aux utilisateurs de notre site de faire de même. En ce qui concerne notre site, nous avons adopté et mis en œuvre une politique relative au droit d'auteur qui prévoit la suppression de tout matériel illicite et le licenciement des utilisateurs de notre site en ligne qui enfreignent de manière répétée les droits de propriété intellectuelle, y compris les droits d'auteur. Si vous pensez que l'un de nos utilisateurs enfreint illégalement le (s) droit (s) d'auteurs sur une œuvre par le biais de notre site et souhaitez faire retirer le contenu prétendument illicite, les informations suivantes, sous la forme d'une notification écrite à 17 USC § 512 (c)) doivent être fournis à notre agent de protection des droits d'auteur désigné:  
+
+<ul>
+    <li>  votre signature physique ou électronique;  </li>
+     <li> l'identification de la ou des œuvres protégées par le droit d'auteur que vous prétendez avoir été enfreintes;</li>  
+    <li>  l'identification du contenu de nos services que vous déclarez contrefait et que vous nous demandez de supprimer;  </li>
+     <li> informations suffisantes pour nous permettre de localiser un tel matériel;  </li>
+     <li> votre adresse, votre numéro de téléphone et votre adresse électronique; </li> 
+    <li>  une déclaration selon laquelle vous croyez de bonne foi que l’utilisation du contenu répréhensible n’est pas autorisée par le propriétaire des droits d’auteur, son mandataire ou en vertu de la loi; </li>
+    <li>
+	
+et une déclaration selon laquelle les informations figurant dans la notification sont exactes et sous peine de parjure, selon lesquelles vous êtes soit le titulaire du droit d'auteur qui aurait été violé, soit vous êtes autorisé à agir au nom du titulaire du droit d'auteur.  </li></ul>
+
+  Veuillez noter que, conformément à 17 États-Unis d’Amérique. § 512 (f), toute déclaration inexacte de faits importants dans une notification écrite engage automatiquement la responsabilité de la partie plaignante pour les dommages, coûts et frais d’avocat supportés par nous dans le cadre de la notification écrite et de l’allégation de violation du droit d'auteur.  
+
+  <h4>Général </h4>
+
+  Ces conditions sont soumises à des révisions occasionnelles. Si nous apportons des modifications substantielles, nous pourrons vous en informer en vous envoyant un e-mail à la dernière adresse e-mail que vous nous avez fournie et / ou en publiant un avis de changements sur notre site. Vous êtes responsable de nous fournir votre adresse e-mail la plus récente. Dans le cas où la dernière adresse e-mail que vous nous avez fournie n'est pas valide, l'envoi de l'e-mail contenant cet avis constituera néanmoins un avis effectif des modifications décrites dans l'avis. Toute modification de ces conditions entrera en vigueur au plus tôt sept (7) jours calendaires après l'envoi de votre notification par courrier électronique ou sept (7) jours calendaires après notre publication de l'avis de modification sur notre site. Ces modifications entreront en vigueur immédiatement pour les nouveaux utilisateurs de notre site. L'utilisation continue de notre site après la notification de telles modifications indiquera votre reconnaissance de ces modifications et votre consentement à être lié par les termes et conditions de ces modifications.
+<h4>Résolution de litige.</h4> 
+Veuillez lire attentivement cette convention d'arbitrage. Cela fait partie de votre contrat avec la société et affecte vos droits. Il contient des procédures pour l’ARBITAGE OBLIGATOIRE ET UNE RENONCIATION AUX ACTIONS CLASSES.  
+
+   <h4> Applicabilité du contrat d'arbitrage. </h4>  
+Toutes les réclamations et tous les différends liés aux Conditions d'utilisation ou à l'utilisation d'un produit ou d'un service fourni par la Société qui ne peut être résolu de manière informelle ou par une cour des petites créances doivent être résolus par arbitrage obligatoire sur une base individuelle selon les termes de la présente convention d'arbitrage. Sauf convention contraire, toutes les procédures d’arbitrage se déroulent en français. La présente convention d'arbitrage s'applique à vous et à la Société, ainsi qu'à toutes les filiales, sociétés affiliées, mandataires, employés, prédécesseurs ayant un intérêt, successeurs et ayants droit, ainsi qu'à tous les utilisateurs ou bénéficiaires autorisés ou non des services ou biens fournis conformément aux conditions.
+
+<h4>    Préavis et résolution informelle des litiges.   </h4>
+Avant que l'une ou l'autre des parties ne demande un arbitrage, elle doit d'abord envoyer à l'autre partie un avis de différend écrit décrivant la nature et le fondement de la plainte ou du différend, et le soulagement demandé. Un avis à la société doit être envoyé à: franklinechisom96@gmail.com Après réception de la notification, vous et la société pouvez tenter de résoudre la réclamation ou le différend de manière informelle. Si vous et la société ne résolvez pas la réclamation ou le différend dans les trente (30) jours suivant la réception de la notification, l'une ou l'autre des parties peut entamer une procédure d'arbitrage. Le montant d'une offre de règlement faite par une partie ne peut être divulgué à l'arbitre qu'après que celui-ci a déterminé le montant de la sentence à laquelle l'une ou l'autre des parties a droit.  
+
+    <h4>Règles supplémentaires applicables à l'arbitrage sans comparution.  </h4> Si un arbitrage sans comparution est choisi, l'arbitrage doit être effectué par téléphone, en ligne et / ou uniquement sur la base de soumissions écrites. la manière spécifique est choisie par la partie qui a lancé l'arbitrage. L'arbitrage n'implique aucune comparution personnelle de la part des parties ou des témoins, à moins que les parties n'en conviennent autrement.  
+
+
+   
+   <h4> Renonciation au procès devant jury.  </h4> Les parties renoncent à leurs droits constitutionnels et législatifs de saisir le tribunal et ont la possibilité de faire comparaître devant un juge ou un jury. résolus par arbitrage en vertu de la présente convention d'arbitrage. Les procédures d’arbitrage sont généralement plus limitées, plus efficaces et moins onéreuses que les règles applicables aux tribunaux et ne sont soumises qu’à un contrôle très limité. Dans l'éventualité d'un litige entre vous et la société devant un tribunal d'État ou fédéral dans le cadre d'une action en annulation ou en exécution d'une sentence arbitrale ou autrement, VOUS ET LA SOCIÉTÉ RENONCEZ À TOUS LES DROITS À UN PROCÈS EN JURY, mais choisissez plutôt que le litige soit résolu par un juge.  
+
+<h4>    Renonciation à des recours collectifs ou globaux. </h4>  Toutes les réclamations et tous les différends relevant de la présente convention d'arbitrage doivent faire l'objet d'un arbitrage ou d'une procédure judiciaire sur une base individuelle et non sur la base d'un recours collectif. Le client ou l'utilisateur ne peut pas être arbitré ou plaidé conjointement ou consolidé avec ceux d'un autre client ou utilisateur.  
+
+  <h4>  Confidentialité.  </h4> Tous les aspects de la procédure d'arbitrage sont strictement confidentiels. Les parties conviennent de maintenir la confidentialité sauf si la loi l'exige autrement. Le présent paragraphe n'empêche pas une partie de soumettre à un tribunal des informations nécessaires à l'exécution du présent accord, à l'exécution d'une sentence arbitrale ou à la demande d'un redressement injonctif ou équitable.  
+
+   <h4> Divisibilité.  </h4> Si une partie de la présente convention d'arbitrage est déclarée invalide ou inapplicable par un tribunal compétent, cette partie ou ces parties spécifiques seront alors inopérantes et inopérantes effectivement et sera dissocié et le reste de l'accord restera en vigueur et de plein effet.  
+
+ <h4>   Droit de renonciation. </h4>  La partie contre laquelle la réclamation est revendiquée peut renoncer à tout ou partie des droits et limitations énoncés dans le présent contrat d'arbitrage. Une telle renonciation ne renonce ni n'affecte aucune autre partie de la présente convention d'arbitrage.  
+
+    <h4>Maintien de l'accord. </h4>  Cet accord d'arbitrage survivra à la résiliation de votre relation avec la société.  
+
+   <h4> Cour des petites créances.  </h4> Néanmoins, vous ou la société pouvez engager une action individuelle devant la cour des petites créances.  
+
+   <h4> Allégement d'urgence équitable.  </h4> Quoi qu'il en soit, l'une ou l'autre des parties peut demander un redressement équitable devant un tribunal afin de maintenir le statu quo en attendant l'arbitrage. Une demande de mesures provisoires ne sera pas considérée comme une renonciation à d’autres droits ou obligations en vertu du présent accord d’arbitrage.  
+
+   <h4> Revendications non sujettes à arbitrage.</h4>   Nonobstant ce qui précède, les allégations de diffamation, de violation de la loi relative à la fraude et aux abus informatiques, ainsi que de violation ou d'appropriation illicite du brevet, du droit d'auteur, de la marque ou des secrets commerciaux de l'autre partie ne pas être soumis à la présente convention d'arbitrage.  
+
+  Dans les cas où la convention d'arbitrage ci-dessus permet aux parties de plaider en justice, les parties acceptent de se soumettre à la juridiction personnelle des tribunaux situés dans le comté de Niamey, au Niger, à cette fin.  
+
+  Le site peut être soumis à la législation nigérienne en matière de contrôle des exportations et aux réglementations en matière d’exportation ou d’importation en vigueur dans d’autres pays. Vous vous engagez à ne pas exporter, réexporter ou transférer, directement ou indirectement, les données techniques nigériennes acquises auprès de la société, ni aucun produit utilisant ces données, en violation des lois ou réglementations nigériennes en matière d'exportation.  
+
+ 
+
+    Communications électroniques.   Les communications que vous entretenez avec la société utilisent des moyens électroniques, que vous utilisiez ou envoyiez des courriers électroniques, que la société publie des notifications sur le site ou communique avec vous par courrier électronique. À des fins contractuelles, vous (a) consentez à recevoir des communications de la société sous forme électronique; et (b) convenez que tous les termes, conditions, accords, avis, divulgations et autres communications que la Société vous fournit par voie électronique satisfont à toute obligation légale que de telles communications satisferaient si elles étaient écrites sur support papier.  
+
+   <h4> Conditions complètes.  </h4> Les présentes conditions constituent l'intégralité de l'accord entre vous et nous concernant l'utilisation du site. Notre incapacité à exercer ou à appliquer tout droit ou toute disposition de ces Conditions ne constitue pas une renonciation à ce droit ou à cette disposition. Les titres de section dans ces Conditions générales sont fournis à titre indicatif uniquement et n’ont aucun effet juridique ou contractuel. Le mot "y compris" signifie "y compris sans limitation". Si une disposition de ces Conditions est jugée invalide ou inapplicable, les autres dispositions de ces Conditions ne seront pas altérées et la disposition invalide ou inapplicable sera réputée modifiée afin qu'elle soit valide et exécutable dans les limites autorisées par la loi. Votre relation avec la société est celle d'un entrepreneur indépendant et aucune des parties n'est un agent ou un partenaire de l'autre. Ces Conditions, ainsi que vos droits et obligations, ne peuvent être cédés, sous-traités, délégués ou autrement transférés par vous sans le consentement écrit préalable de la Société, et toute tentative de cession, de sous-traitance, de délégation ou de transfert en violation de ce qui précède sera nulle et non avenue. vide. La société peut librement attribuer ces conditions. Les conditions énoncées dans les présentes conditions lient les cessionnaires.  
+
+  
+    Informations sur les droits d'auteur / marques de commerce.   Copyright ©. Tous les droits sont réservés. Toutes les marques, logos et marques de service affichés sur le site sont notre propriété ou la propriété d'autres tiers. Vous n'êtes pas autorisé à utiliser ces marques sans notre consentement écrit préalable ou le consentement du tiers qui en est propriétaire.  <br/>
+
+<h4>  Informations de contact </h4>
+
+ <b>Adresse:</b><br/>  Niamey Niger  <br/><br/>
+ <b>Email: </b><br/> franklinechisom96@gmail.com
+ 
+ </div>  </div> <br/><br/></div>
+ 
+    
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="/sdcard/Meilleurs/journal/conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="/sdcard/Meilleurs/ContactFrom_v17/index.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="/sdcard/Meilleurs/profiles/franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="/sdcard/Meilleurs/main.js"></script >
+</HTML>
