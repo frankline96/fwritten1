@@ -79,47 +79,47 @@ function next4comp() {
 
 
 
-function next1comp() {
-  if (document.getElementById("gr5comp").style.display="none") {
-    document.getElementById("gr5comp").style.display=""; document.getElementById("gr1comp").style.display="none";
- document.getElementById("1nextcomp").style.display="none";
- document.getElementById("2nextcomp").style.display="";
+function next1() {
+  if (document.getElementById("gr5").style.display="none") {
+    document.getElementById("gr5").style.display=""; document.getElementById("gr1").style.display="none";
+ document.getElementById("1next").style.display="none";
+ document.getElementById("2next").style.display="";
     return;
   }
   
 }
-function next2comp() {
-  if (document.getElementById("gr4comp").style.display="none") {
-    document.getElementById("gr4comp").style.display=""; document.getElementById("gr5comp").style.display="none";
- document.getElementById("2nextcomp").style.display="none";
- document.getElementById("3nextcomp").style.display="";
+function next2() {
+  if (document.getElementById("gr4").style.display="none") {
+    document.getElementById("gr4").style.display=""; document.getElementById("gr5").style.display="none";
+ document.getElementById("2next").style.display="none";
+ document.getElementById("3next").style.display="";
     return;
   }
   
 }
-function next3comp() {
-  if (document.getElementById("gr3comp").style.display="none") {
-    document.getElementById("gr3comp").style.display=""; document.getElementById("gr4comp").style.display="none";
- document.getElementById("3nextcomp").style.display="none";
- document.getElementById("4nextcomp").style.display="";
+function next3() {
+  if (document.getElementById("gr3").style.display="none") {
+    document.getElementById("gr3").style.display=""; document.getElementById("gr4").style.display="none";
+ document.getElementById("3next").style.display="none";
+ document.getElementById("4next").style.display="";
     return;
   }
 
   
 }
-function next4comp() {
-  if (document.getElementById("gr2comp").style.display="none") {
-    document.getElementById("gr2comp").style.display=""; document.getElementById("gr3comp").style.display="none";
- document.getElementById("4nextcomp").style.display="none";
- document.getElementById("5nextcomp").style.display="";
+function next4() {
+  if (document.getElementById("gr2").style.display="none") {
+    document.getElementById("gr2").style.display=""; document.getElementById("gr3").style.display="none";
+ document.getElementById("4next").style.display="none";
+ document.getElementById("5next").style.display="";
     return;
   }
 }
-  function next5comp() {
-  if (document.getElementById("gr1comp").style.display="none") {
-    document.getElementById("gr1comp").style.display=""; document.getElementById("gr2comp").style.display="none";
- document.getElementById("5nextcomp").style.display="none";
- document.getElementById("1nextcomp").style.display="";
+  function next5() {
+  if (document.getElementById("gr1").style.display="none") {
+    document.getElementById("gr1").style.display=""; document.getElementById("gr2").style.display="none";
+ document.getElementById("5next").style.display="none";
+ document.getElementById("1next").style.display="";
     return;
   }
   
