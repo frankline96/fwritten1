@@ -1,0 +1,230 @@
+.photo{
+    background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+    background-repeat: no-repeat;
+}
+.category{
+    background-color: blue;
+    color: white;
+    height: 30px;
+    width:60%;
+    position: relative;
+    top: 80%;
+    font-size: 25px;
+    font-family: 'Questrial',sans-serif;
+    text-align: center;
+    padding: 2px 10px 5px 15px; 
+    text-transform: capitalize;
+    left: -7%;
+    letter-spacing: 1px;
+    transform: scale(0.9); 
+    margin-bottom:0px;
+}
+.category:before{
+    position: absolute;
+    content: "";
+    border-top:10px solid blue;
+    border-left:15px solid transparent;
+    left: 0;
+    bottom: -10px;
+    transform: scale(0.9); 
+    margin-bottom:0px;
+}
+
+.card{
+    width: 90%;
+    
+   margin-left:5%;
+   margin-top:0px;
+}
+
+.title{
+    font-size: 25px;
+    color: #404040;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    
+}
+.time{
+    font-size: 13px;
+    color: #bbbbbb;
+    font-family: 'Montserrat',sans-serif;
+   
+}
+.author{
+    font-size: 18px;
+    color: #bbbbbb;
+    font-family: 'Montserrat',sans-serif;
+   
+}
+.blogcont{
+	font-family: 'arial',sans-serif;
+	text-indent:30px;
+	color:#333333;
+	font-size:18px;
+	line-height:25px;
+	letter-spacing:1px;
+	word-spacing:2px;
+}
+.firstlet{
+	font-family: 'cursive',sans-serif;
+	font-size:40px;
+	color:#333333;
+}
+
+ul.page {
+    display: inline-block;
+    padding: 0;
+    margin: 0px 0px 0px 5%;
+}
+
+ul.page li {display: inline;}
+
+ul.page li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color .3s;
+}
+
+ul.page li a.active {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
+ul.page li a:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+
+
+
+/* compdisplay */
+
+.photocomp{
+    background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+    background-repeat: no-repeat;
+}
+.categorycomp{
+    background-color: blue;
+    color: white;
+    height: 50px;
+    width:40%;
+    position: relative;
+    top: 70%;
+    font-size: 40px;
+    font-family: 'Questrial',sans-serif;
+    text-align: center;
+    padding: 2px 10px 5px 15px; 
+    text-transform: capitalize;
+    left: -6%;
+    letter-spacing: 1px;
+    transform: scale(0.9); 
+    margin-bottom:0px;
+}
+.categorycomp:before{
+    position: absolute;
+    content: "";
+    border-top:40px solid blue;
+    border-left:40px solid transparent;
+    left: 0;
+    bottom: -37px;
+    transform: scale(0.9); 
+    margin-bottom:0px;
+}
+
+.cardcomp{
+    width: 90%;
+    
+   margin-left:5%;
+   margin-top:0px;
+}
+
+.titlecomp{
+    font-size: 25px;
+    color: #404040;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 600;
+    
+}
+.timecomp{
+    font-size: 13px;
+    color: #bbbbbb;
+    font-family: 'Montserrat',sans-serif;
+   
+}
+.authorcomp{
+    font-size: 18px;
+    color: #bbbbbb;
+    font-family: 'Montserrat',sans-serif;
+   
+}
+.blogcontcomp{
+	font-family: 'arial',sans-serif;
+	text-indent:70px;
+	color:#333333;
+	font-size:30px;
+	line-height:40px;
+	letter-spacing:1px;
+	word-spacing:2px;
+	border-left:30px #f2f2f2 solid;
+	padding-left:50px;
+}
+.firstletcomp{
+	font-family: 'cursive',sans-serif;
+	font-size:80px;
+	color:#333333;
+}
+
+ul.pagecomp {
+    display: inline-block;
+    padding: 0;
+    margin: 0px 0px 0px 20%;
+}
+
+ul.pagecomp li {display: inline;}
+
+ul.pagecomp li a {
+    color: black;
+    float: left;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color .3s;
+    font-size:26px;
+}
+
+ul.pagecomp li a.activecomp {
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+}
+
+ul.pagecomp li a:hover:not(.active) {background-color: #ddd;}
+
+.art1{
+	font-size: 25px;
+	color: black;
+	 padding-left:0px; 
+	 width:100%;
+	font-family: 'Montserrat',sans-serif;
+
+}
+.timecomp1{
+    font-size: 16px;
+    color: #bbbbbb;
+    font-family: 'Montserrat',sans-serif;
+}
