@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<HTML lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+
+<meta name="author" content="Frankline Chisom">
+<title>Journal - Bouzazois</title>
+<link rel="stylesheet" href="/sdcard/Meilleurs/main.css">
+<link rel="stylesheet" href="/sdcard/Meilleurs/journal/journal.css">
+<link rel="stylesheet" href="/sdcard/Meilleurs/glitch.css">
+<script src="/sdcard/Meilleurs/main.js"></script >
+
+</head>
+
+<body onload="init();">
+<div class="phonedisplay">     
+<div class="">   
+<div class="">
+<div class="head"><canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div><div class ="head2"><br /> <br/><br/> <br /><br /><br/><br/>
+     <div class="glitch" data-text="bouzazois">bouzazois</div>
+ <center ><div><br /></div></center ></div>
+</div><br/><br /><br /><br /><br />
+    
+<div class="whorwe ">Nos articles</div>
+<br/><br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;">
+                <div class="category">Traditionnels</div>
+            </div>
+<div class="card">
+	<a href="" style="text-decoration:none;" class="title">Coronation du chef des chasseurs du Canton de Madaoua.</a>	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+</div>
+<br/>
+<ul class="page">
+  
+  <li><a class="active" href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">»</a></li>
+</ul>
+
+<br/><br/><br/><br/><hr/>
+     <!-- Form section start -->
+     
+            <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+      <div class="contact" >           
+            <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>
+        </div>
+        <!-- Form section end -->
+
+<div style="position: absolute; left: -5000px;">
+  <input type="checkbox" name="american_taupe_plaid_trek" value="1" tabindex="-1" autocomplete="no">
+</div>
+        
+    
+
+
+
+<!-- Only include this once in your webpage -->
+<script type="text/javascript" src="https://app.99inbound.com/99inbound.js"></script>
+
+<br/><br/>
+<div class="footer "><br/>
+	<div class="spons">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="/sdcard/Meilleurs/journal/conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="/sdcard/Meilleurs/ContactFrom_v17/index.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="/sdcard/Meilleurs/profiles/franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div>
+</div>
+
+
+
+
+<!-- compdisplay -->
+
+
+
+<div class="compdisplay">     
+<div class="">   
+<div class="">
+<div class="headcomp"><canvas style="width: 100%; height:200px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div><div class ="head2comp" style="height:200px;">
+     <div class="glitchi" data-text="bouzazois">bouzazois</div>
+ </div>
+</div><br/>
+
+<div class="whorwecomp ">Nos articles</div>
+
+<div style="width:80%; margin-left:10%;">
+<br/><br /> 
+
+<div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+
+<br /> <div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+
+</div>
+
+
+<hr/>
+<br />
+<div style="clear:both;">
+</div>
+
+<div class="maincomp">
+		<div class="bgprofscomp" style="background-color:white; padding-left:3%; padding-right:3%;">
+<a href="/sdcard/Meilleurs/Journal/coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><div><img src="journal.jpg" width ="100%" height ="400px" style="border:1px solid grey; border-radius:3px;"><div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></div></a><br/>
+ <br />
+
+
+<br /><br />
+</div>
+</div>
+</div>
+
+<div class="menucomp">
+	<div class="bgprofscomp" style="background-color:white; padding-left:2%; border:0px;">
+<a href="/sdcard/Meilleurs/Journal/coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><div><img src="journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/>
+ <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /><font class="timecomp" size="3px"> &boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/> <br />
+
+</div>
+</div>
+
+<br/><br/></div>
+<div class="compdisplay"><hr style="clear:both;"/>
+<br/>
+
+
+
+<div style="width:80%; margin-left:10%;">
+
+<br /> <div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br /><br />
+</div>
+<br /> <div style=" background: url(journal.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;">
+                <div class="categorycomp">Traditionnels</div>
+            </div>
+<div class="cardcomp">
+	<a href="" style="text-decoration:none;" class="titlecomp">Coronation du chef des chasseurs du Canton de Madaoua.</a>
+	<br/><div><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">1 Sep 2019</span></div><br/>
+<div style="border-bottom:2px solid grey;"></div><br />
+</div>
+</div>
+
+<ul class="pagecomp">
+  
+  <li><a class="activecomp" href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">»</a></li>
+</ul>
+<br/><br/><hr/><br/><br/>
+
+<div style="clear:both;"></div>
+<div class="maincomp">
+		<div class="bgprofscomp" style="background-color:white; padding-left:3%;">
+<a href="/sdcard/Meilleurs/Journal/coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><div><img src="journal.jpg" width ="95%" height ="200px" style="border:1px solid grey; border-radius:3px;"><div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua.  <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></div></a><br/>
+ <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="200px" style="border:1px solid grey; border-radius:3px;"><div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua.  <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></a><br/> <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="200px" class="imgjournalcomp"><div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua.  <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></div></a><br/><br/>
+
+<br /><br />
+</div>
+</div>
+</div>
+
+
+<div class="menucomp">
+	<div class="bgprofscomp" style="background-color:white;">
+<a href="/sdcard/Meilleurs/Journal/coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="150px" style="border:1px solid grey; border-radius:3px;"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/>
+ <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="150px" style="border:1px solid grey; border-radius:3px;"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/> <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="150px" class="imgjournalcomp"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/>
+ <br />
+<a href="" style ="text-decoration: none;"><div><img src="journal.jpg" width ="90%" height ="150px" class="imgjournalcomp"><div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div></div></a><br/>
+</div>
+</div>
+
+<br/><br/></div>
+<div class="compdisplay"><hr style="clear:both;"/>
+<br/>
+ 
+
+
+
+
+
+
+
+
+
+
+<br/><hr/>
+     <!-- Form section start -->
+     
+            <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+      <div class="contact" >           
+            <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>
+        </div>
+        <!-- Form section end -->
+
+<div style="position: absolute; left: -5000px;">
+  <input type="checkbox" name="american_taupe_plaid_trek" value="1" tabindex="-1" autocomplete="no">
+</div>
+        
+    
+
+<br/><br/>
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="/sdcard/Meilleurs/journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="/sdcard/Meilleurs/journal/conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="/sdcard/Meilleurs/ContactFrom_v17/index.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="/sdcard/Meilleurs/profiles/franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="/sdcard/Meilleurs/main.js"></script >
+</HTML>
