@@ -608,7 +608,7 @@ input, textarea {
 <br/><br/><hr/>
 <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
 <div class="contact" >  
-<form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+<form onsubmit('document.getElementById("cont").innerHTML = Votre message a été envoyé;'); id="cont" lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
                 <input name="name" placeholder="Nom" type="text" required /><br/>
                 <input name="Email" placeholder="Email" type="email" required /><br/>
                 <textarea name="message" placeholder="Votre message" required ></textarea>
