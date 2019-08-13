@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+<meta name="yandex-verification" content="97baca6a243b2dbd" />
+<meta name="google-site-verification" content="7_ceips8wN2g-Ephh0RIeHMhYg5cCYpZRTdfgT9vZfI" />
+
+<meta name="author" content="Frankline Chisom">
+<title>Comment Choisir une carrière | Bouzazois</title>
+<link rel="icon"  type="image/png" href="logo.ico">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="css/glitch.css">
+	<link rel="stylesheet" href="profile.css">
+	<link rel="stylesheet" href="journal.css">
+<script src="main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init(); initi();">
+<div class="phonedisplay">   
+
+
+
+
+<div class="head">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div>
+<div class ="head2">
+<br /> <br/><br/> <br /><br /><br/><br/>
+<div class="glitch" data-text="bouzazois">bouzazois</div>
+</div>
+
+<br/><br/><br/><br/>
+
+<div style=" background: url(images/journal/career.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); ">
+<div class="category">Conseils</div>
+            </div>
+            
+           
+            
+
+
+
+
+
+
+
+
+
+
+            
+<div class="card">
+	<div class="title">Comment choisir une carrière?</div>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">13 Août 2019</span></div><br/><br/><div class="blogcont" style="border-left:10px #f2f2f2 solid;
+	padding-left:15px">
+
+<br/>
+Il y a tellement d'options possibles. Comment choisir un cheminement de carrière adapté à vos compétences et à vos intérêts? Une carrière que vous pouvez apprécier et faire bien dans? Imprimez et conservez cette liste de façons de choisir vos meilleurs choix de carrière - et prenez le temps de les parcourir.
+<h2>
+Evaluez-vous - Qui êtes-vous en ce moment?
+</h2>
+Pensez à qui vous êtes, ce que vous êtes bon et ce que vous aimez. Cela vous aidera à choisir des idées de carrière qui correspondent à vos compétences et à vos intérêts.
+<br/>
+Voici quelques questions et activités utiles à explorer:
+<br/><ul><li>
+Quelles matières as-tu aimé étudier à l'école et au-delà? Pourquoi? Est-ce parce que vous aimez la personne qui vous enseigne, ou qu’il y a quelque chose à ce sujet que vous pouvez vraiment comprendre?
+</li><li>
+À quels sujets avez-vous bien réussi et pourquoi?
+</li><li>
+Si vous deviez choisir un favori parmi les mots, les chiffres, les éléments visuels et les activités physiques, lequel choisiriez-vous? Pourriez-vous vous voir dans un emploi où votre premier choix constitue une grande partie de ce que vous faites tous les jours?
+</li></ol><br/>
+
+<h2>ACTIVITES UTILES D'AUTO-EVALUATION</h2>
+Prenez l'un des tests de personnalité de carrière en ligne pour en savoir plus sur vos qualités et forces personnelles. Également appelés tests d'aptitude professionnelle ou tests d'auto-évaluation, ils peuvent vous aider à faire des choix de carrière en fonction de vos traits de caractère ou de vos qualités.
+<br/>
+<b>Faites une analyse SWOT.</b> Tout ce dont vous avez besoin est un stylo, du papier et la volonté d’être honnête avec vous-même. Ne vous inquiétez pas, personne d’autre ne verra les résultats de cet exercice, juste vous! Utilisez votre analyse SWOT pour déterminer vos forces, vos faiblesses, les menaces qui pèsent sur vos objectifs et les opportunités que vous pouvez atteindre et saisir si vous le souhaitez.
+<br/>
+Pensez aux <b>5 compétences de vie et de travail les plus importantes</b> que vous avez déjà - et sur lesquelles vous souhaitez vous appuyer. Quelle compétence vous semble la plus facile en matière de communication, d’autogestion, de confiance en soi, de travail d’équipe et de résolution de problèmes? Chaque carrière a besoin de ces compétences, mais certaines plus que d’autres. Les carrières dans les domaines de la vente, des soins infirmiers, de l’enseignement et de l’investigation ont besoin de votre talent pour la communication. En tant qu’entraîneur sportif ou pompier, vous devez être en bonne forme physique et vous apprécierez ces carrières si vous aimez les activités physiques. Certaines carrières vraiment inhabituelles exigent que vous maîtrisiez bien les chiffres, comme être associé à la correction des erreurs sur une plate-forme ou technologue en alimentation. Vous pouvez développer toutes ces compétences gratuitement en tant que jeune professionnel.<br/>
+Une fois que vous avez bien réfléchi à vos compétences et à vos intérêts, dressez une liste de toutes les carrières qui, à votre avis, pourraient bien correspondre. Rappelez-vous, il y a beaucoup plus de carrières qui pourraient être un bon match auquel vous n'avez pas encore pensé!
+<br/>
+<h2>Construisez une liste de carrières sur lesquelles vous souhaitez en savoir plus</h2>
+Si vous avez évalué vos forces, vos compétences et vos intérêts, vous devriez avoir une liste de carrières à considérer. Il est utile d’avoir une longue liste, avec au moins dix choix de carrière, car il n’existe pas de carrière rêvée. De nombreuses carrières pourraient être un bon match pour vous.
+<br/>
+Avez-vous déjà des «carrières de rêve» en haut de votre liste? Utilisez ces meilleurs choix pour élargir votre liste de carrières. Rendez-vous sur notre carrefour des carrières pour voir dans lequel des quinze secteurs d’activité ou «secteurs» de votre choix, la carrière de rêve, tomberait - comme les carrières créatives ou les carrières scientifiques, par exemple. Vous pouvez en savoir plus sur ce secteur et les emplois que vous pourriez y faire. Chaque secteur comporte une gamme d'emplois dans lesquels vous pourriez être excellent. Vous apprendrez combien ils paient, quelles sont les qualifications dont vous pourriez avoir besoin, comment commencer quand vous quittez l’école ou les études et qui peut vous aider.<br/>
+EXEMPLE: Disons que vous aimez l’idée d’être un assistant d’enseignement. Vous visitez des emplois de garde d'enfants et d'éducation dans notre carrefour des carrières pour en savoir plus. Vous découvrez la description de poste d'un formateur en informatique et décidez que cela sonne plutôt bien. Cela vous fait penser - peut-être que vous trouverez également une foule de choix de carrière passionnants dans les carrières numériques?
+<br/>
+À ce jour, vous devriez avoir constitué une liste complète de choix de carrière que vous aimez bien. Visez au moins dix carrières sur votre liste. Il y aura probablement des idées de carrière auxquelles vous aurez déjà pensé, mais aussi des carrières possibles que vous ne connaissez pas vraiment ou que vous n’avez pas vraiment envisagées auparavant.
+<br/>
+<h2>Créer une liste de 2 à 5 meilleurs choix de carrière</h2>
+Il est maintenant temps de réduire votre liste de carrières - mais pas trop! Vous voulez garder l'esprit ouvert, car plus d'une carrière de rêve vous attend. Choisissez les carrières qui vous intéressent. Essayez de choisir les carrières qui correspondent à vos qualifications jusqu'à présent (ou si vous voulez réellement acquérir toutes les qualifications nécessaires au fil du temps. N'oubliez pas que Rome ne s'est pas construite en un jour - vous pouvez toujours en faire plus. cours ou apprendre à temps partiel si vous en avez besoin).
+<br/>
+Voyez si vos meilleurs choix de carrière présentent des qualifications et des compétences similaires qui pourraient vous être utiles dans votre future carrière. Peut-être que tous vos meilleurs choix de carrière disent qu'il est bon d'avoir de bonnes notes de passage en sciences, en anglais ou en géographie. Notez-le, car cela peut vous aider à choisir vos futures options d’études - qu’il s’agisse de choisir le GCSES et le baccalauréat, ou d’envisager des cours et d’étudier une fois que vous aurez quitté l’école.
+<br/>
+<h2>Pensez à vos objectifs à court et à long terme</h2>
+Maintenant que vous avez pensé à choisir une carrière qui vous convient, votre prochaine étape consiste à réfléchir à des objectifs réalisables.
+<br/>
+Pour que votre choix de carrière devienne réalité, vers quoi allez-vous travailler dans les prochains mois? Et dans les prochaines années?
+<br/>
+Créez un document ou une feuille de calcul. Énumérez toutes les étapes que vous pouvez suivre pour atteindre vos objectifs - et ajoutez une date à laquelle vous souhaitez les atteindre. Y a-t-il une note que vous souhaitez obtenir sur un projet ou un examen scolaire? Un cours que vous aimeriez rechercher? Une heure que vous aimeriez consacrer à la recherche d’interviews en ligne avec des personnes qui font le travail de vos rêves? Vos objectifs peuvent être petits ou grands. Ils peuvent être atteints ce soir ou l'année prochaine - mais ils doivent être réalisables.
+<br/>
+Créez votre liste d'objectifs réalisables, ajoutez des dates de référence et vous avez fait un grand pas en avant pour choisir une carrière, mais également pour concrétiser votre rêve.
+<h2>
+Il existe plus d’une voie vers tous les choix de carrière de vos rêves.</h2><h3>
+N'oubliez jamais que si vous avez de l'intérêt, vous pouvez développer vos compétences et vos qualifications.</h3>
+<br/>
+Quel que soit votre choix de carrière, rien n’indique. Nous répertorions toujours plusieurs cheminements de carrière dans toutes les idées de carrière que nous proposons. Vous pouvez aller à l'université. Vous pouvez commencer dans un emploi junior et travailler votre chemin. Et vous pouvez obtenir un apprentissage pour presque toutes les carrières auxquelles vous pouvez penser. Il s’agit de trouver le bon apprentissage pour vous. Par exemple, si vous souhaitez entreprendre une carrière dans la finance ou le numérique, EY, un géant des services financiers, propose des stages en entreprise et même des diplômes en numérique, où vous pouvez devenir apprenti et obtenir un diplôme gratuitement!
+<h3>
+N'oubliez pas: votre carrière de rêve comporte plusieurs chemins, mais il en existe plusieurs.<h3>
+
+Vos compétences et vos intérêts pourraient être un bon compromis pour toutes sortes de carrières - même certaines dont vous n’avez pas encore entendu parler. Ce qui est important, c’est de choisir une gamme de carrières qui vous passionnera, car une carrière qui commence par le service à la clientèle (vous aimez peut-être être sociale) pourrait mener à une carrière dans les domaines de la santé, de la restauration et de l’hôtellerie, du journalisme ou de la vente - pour ne citer que quelques exemples. peu.
+
+
+
+
+<br/>
+<span class="author"> source: youthemployment.org.uk </span>
+
+           
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">    
+<div class="headcomp">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<10;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div>
+<div class ="head2comp" style=" height:180px;"><br />
+<div class="glitchi" data-text="bouzazois">bouzazois</div>
+</div>
+<br/><br/>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">
+<div style="width:90%; margin-left:7%">
+<br/>
+<div style=" background: url(images/journal/career.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;
+   ">
+                <div class="categorycomp">Conseils</div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+<div class="cardcomp">
+<a style="text-decoration:none;" class="titlecomp">Comment choisir une carrière?</a>
+	<br/><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">13 Août 2019</span></div>
+<br/><div class="blogcontcomp">
+
+<br/>
+Il y a tellement d'options possibles. Comment choisir un cheminement de carrière adapté à vos compétences et à vos intérêts? Une carrière que vous pouvez apprécier et faire bien dans? Imprimez et conservez cette liste de façons de choisir vos meilleurs choix de carrière - et prenez le temps de les parcourir.
+<h2>
+Evaluez-vous - Qui êtes-vous en ce moment?
+</h2>
+Pensez à qui vous êtes, ce que vous êtes bon et ce que vous aimez. Cela vous aidera à choisir des idées de carrière qui correspondent à vos compétences et à vos intérêts.
+<br/>
+Voici quelques questions et activités utiles à explorer:
+<br/><ul><li>
+Quelles matières as-tu aimé étudier à l'école et au-delà? Pourquoi? Est-ce parce que vous aimez la personne qui vous enseigne, ou qu’il y a quelque chose à ce sujet que vous pouvez vraiment comprendre?
+</li><li>
+À quels sujets avez-vous bien réussi et pourquoi?
+</li><li>
+Si vous deviez choisir un favori parmi les mots, les chiffres, les éléments visuels et les activités physiques, lequel choisiriez-vous? Pourriez-vous vous voir dans un emploi où votre premier choix constitue une grande partie de ce que vous faites tous les jours?
+</li></ol><br/>
+
+<h2>ACTIVITES UTILES D'AUTO-EVALUATION</h2>
+Prenez l'un des tests de personnalité de carrière en ligne pour en savoir plus sur vos qualités et forces personnelles. Également appelés tests d'aptitude professionnelle ou tests d'auto-évaluation, ils peuvent vous aider à faire des choix de carrière en fonction de vos traits de caractère ou de vos qualités.
+<br/>
+<b>Faites une analyse SWOT.</b> Tout ce dont vous avez besoin est un stylo, du papier et la volonté d’être honnête avec vous-même. Ne vous inquiétez pas, personne d’autre ne verra les résultats de cet exercice, juste vous! Utilisez votre analyse SWOT pour déterminer vos forces, vos faiblesses, les menaces qui pèsent sur vos objectifs et les opportunités que vous pouvez atteindre et saisir si vous le souhaitez.
+<br/>
+Pensez aux <b>5 compétences de vie et de travail les plus importantes</b> que vous avez déjà - et sur lesquelles vous souhaitez vous appuyer. Quelle compétence vous semble la plus facile en matière de communication, d’autogestion, de confiance en soi, de travail d’équipe et de résolution de problèmes? Chaque carrière a besoin de ces compétences, mais certaines plus que d’autres. Les carrières dans les domaines de la vente, des soins infirmiers, de l’enseignement et de l’investigation ont besoin de votre talent pour la communication. En tant qu’entraîneur sportif ou pompier, vous devez être en bonne forme physique et vous apprécierez ces carrières si vous aimez les activités physiques. Certaines carrières vraiment inhabituelles exigent que vous maîtrisiez bien les chiffres, comme être associé à la correction des erreurs sur une plate-forme ou technologue en alimentation. Vous pouvez développer toutes ces compétences gratuitement en tant que jeune professionnel.<br/>
+Une fois que vous avez bien réfléchi à vos compétences et à vos intérêts, dressez une liste de toutes les carrières qui, à votre avis, pourraient bien correspondre. Rappelez-vous, il y a beaucoup plus de carrières qui pourraient être un bon match auquel vous n'avez pas encore pensé!
+<br/>
+<h2>Construisez une liste de carrières sur lesquelles vous souhaitez en savoir plus</h2>
+Si vous avez évalué vos forces, vos compétences et vos intérêts, vous devriez avoir une liste de carrières à considérer. Il est utile d’avoir une longue liste, avec au moins dix choix de carrière, car il n’existe pas de carrière rêvée. De nombreuses carrières pourraient être un bon match pour vous.
+<br/>
+Avez-vous déjà des «carrières de rêve» en haut de votre liste? Utilisez ces meilleurs choix pour élargir votre liste de carrières. Rendez-vous sur notre carrefour des carrières pour voir dans lequel des quinze secteurs d’activité ou «secteurs» de votre choix, la carrière de rêve, tomberait - comme les carrières créatives ou les carrières scientifiques, par exemple. Vous pouvez en savoir plus sur ce secteur et les emplois que vous pourriez y faire. Chaque secteur comporte une gamme d'emplois dans lesquels vous pourriez être excellent. Vous apprendrez combien ils paient, quelles sont les qualifications dont vous pourriez avoir besoin, comment commencer quand vous quittez l’école ou les études et qui peut vous aider.<br/>
+EXEMPLE: Disons que vous aimez l’idée d’être un assistant d’enseignement. Vous visitez des emplois de garde d'enfants et d'éducation dans notre carrefour des carrières pour en savoir plus. Vous découvrez la description de poste d'un formateur en informatique et décidez que cela sonne plutôt bien. Cela vous fait penser - peut-être que vous trouverez également une foule de choix de carrière passionnants dans les carrières numériques?
+<br/>
+À ce jour, vous devriez avoir constitué une liste complète de choix de carrière que vous aimez bien. Visez au moins dix carrières sur votre liste. Il y aura probablement des idées de carrière auxquelles vous aurez déjà pensé, mais aussi des carrières possibles que vous ne connaissez pas vraiment ou que vous n’avez pas vraiment envisagées auparavant.
+<br/>
+<h2>Créer une liste de 2 à 5 meilleurs choix de carrière</h2>
+Il est maintenant temps de réduire votre liste de carrières - mais pas trop! Vous voulez garder l'esprit ouvert, car plus d'une carrière de rêve vous attend. Choisissez les carrières qui vous intéressent. Essayez de choisir les carrières qui correspondent à vos qualifications jusqu'à présent (ou si vous voulez réellement acquérir toutes les qualifications nécessaires au fil du temps. N'oubliez pas que Rome ne s'est pas construite en un jour - vous pouvez toujours en faire plus. cours ou apprendre à temps partiel si vous en avez besoin).
+<br/>
+Voyez si vos meilleurs choix de carrière présentent des qualifications et des compétences similaires qui pourraient vous être utiles dans votre future carrière. Peut-être que tous vos meilleurs choix de carrière disent qu'il est bon d'avoir de bonnes notes de passage en sciences, en anglais ou en géographie. Notez-le, car cela peut vous aider à choisir vos futures options d’études - qu’il s’agisse de choisir le GCSES et le baccalauréat, ou d’envisager des cours et d’étudier une fois que vous aurez quitté l’école.
+<br/>
+<h2>Pensez à vos objectifs à court et à long terme</h2>
+Maintenant que vous avez pensé à choisir une carrière qui vous convient, votre prochaine étape consiste à réfléchir à des objectifs réalisables.
+<br/>
+Pour que votre choix de carrière devienne réalité, vers quoi allez-vous travailler dans les prochains mois? Et dans les prochaines années?
+<br/>
+Créez un document ou une feuille de calcul. Énumérez toutes les étapes que vous pouvez suivre pour atteindre vos objectifs - et ajoutez une date à laquelle vous souhaitez les atteindre. Y a-t-il une note que vous souhaitez obtenir sur un projet ou un examen scolaire? Un cours que vous aimeriez rechercher? Une heure que vous aimeriez consacrer à la recherche d’interviews en ligne avec des personnes qui font le travail de vos rêves? Vos objectifs peuvent être petits ou grands. Ils peuvent être atteints ce soir ou l'année prochaine - mais ils doivent être réalisables.
+<br/>
+Créez votre liste d'objectifs réalisables, ajoutez des dates de référence et vous avez fait un grand pas en avant pour choisir une carrière, mais également pour concrétiser votre rêve.
+<h2>
+Il existe plus d’une voie vers tous les choix de carrière de vos rêves.</h2><h3>
+N'oubliez jamais que si vous avez de l'intérêt, vous pouvez développer vos compétences et vos qualifications.</h3>
+<br/>
+Quel que soit votre choix de carrière, rien n’indique. Nous répertorions toujours plusieurs cheminements de carrière dans toutes les idées de carrière que nous proposons. Vous pouvez aller à l'université. Vous pouvez commencer dans un emploi junior et travailler votre chemin. Et vous pouvez obtenir un apprentissage pour presque toutes les carrières auxquelles vous pouvez penser. Il s’agit de trouver le bon apprentissage pour vous. Par exemple, si vous souhaitez entreprendre une carrière dans la finance ou le numérique, EY, un géant des services financiers, propose des stages en entreprise et même des diplômes en numérique, où vous pouvez devenir apprenti et obtenir un diplôme gratuitement!
+<h3>
+N'oubliez pas: votre carrière de rêve comporte plusieurs chemins, mais il en existe plusieurs.<h3>
+
+Vos compétences et vos intérêts pourraient être un bon compromis pour toutes sortes de carrières - même certaines dont vous n’avez pas encore entendu parler. Ce qui est important, c’est de choisir une gamme de carrières qui vous passionnera, car une carrière qui commence par le service à la clientèle (vous aimez peut-être être sociale) pourrait mener à une carrière dans les domaines de la santé, de la restauration et de l’hôtellerie, du journalisme ou de la vente - pour ne citer que quelques exemples. peu.
+
+
+
+
+<br/>
+<span class="author"> source: youthemployment.org.uk </span>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+<br/><hr/><br/>
+
+<div style="margin:0px 4% 0px 4%;>
+
+
+<script id="dsq-count-scr" src="//bouzazois.disqus.com/count.js" async></script>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = bouzazois.disqus.com;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = bouzazois.tk/choisir_carrière; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bouzazois.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+</div>
+
+<br/><hr/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/>
+<div class="whorwe  ">Autres Articles</div>
+
+
+<div class="bgprofs" style="background-color:white;">
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+
+
+
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+<br />
+<center><a href="journal.html" style="text-decoration:none;"><div class="plus">... plus d'articles</div>
+</a></center>
+<br /><br />
+<br />
+</div>
+<br/><br/>
+    
+</div>
+    
+    
+      
+ 
+<style>
+form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}
+</style>
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/><hr/>
+<div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+<div class="contact" >  
+<form id="cont" lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+    
+    
+ 
+ 
+ 
+ 
+ 
+ </div>   
+    
+    
+    
+ 
+ <div class="phonedisplay">
+<div class="footer  "><br/>
+<div class="spons">Sponsors et Parténaires</div>
+	
+<br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div>
+	<br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+   
+ <div style="border-bottom:1px solid blue;"></div>
+<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center>
+</div>
+</div>
+
+
+
+
+
+<!-- compdisplay-->
+
+
+
+
+
+
+
+<div class="compdisplay">
+<br/>
+<div class="whorwecomp  ">Autres Articles</div><br/>
+<div class="maincomp">
+<div class="bgprofscomp" style="background-color:white; padding-left:3%; padding-right:3%;">
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><img src="images/journal/journal.jpg" width ="100%" height ="400px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></a>
+</div><br/>
+ <br /><br /><br />
+</div>
+
+
+
+
+<div class="menucomp">
+		
+<div class="bgprofscomp" style="background-color:white; padding-left:2%; border:0px;">
+		
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div>
+</a><br/><br/>
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div>
+</a><br/><br/>
+
+</div>
+</div>
+
+
+
+<br/><a href="journal.html">
+<div class="pluscomp" style="width:40%; padding-left:100px;">... plus d'articles</div></a><br /><br />
+<br />
+
+<br/><br/>
+<div class="compdisplay"><hr style="clear:both;"/>
+    
+</div>
+    
+    
+      
+ 
+<style>form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}</style><br/><br/>
+
+
+
+<!-- Only include this once in your webpage -->
+<script type="text/javascript" src="https://app.99inbound.com/99inbound.js"></script>
+    <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+                 
+       <div class="contact" >    <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+ 
+ </div>   
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="main.js"></script >
+</HTML>
