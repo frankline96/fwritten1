@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+
+<meta name="author" content="Frankline Chisom">
+<title>7 étapes pour devenir entrepreneur | Bouzazois</title>
+<link rel="icon"  type="image/png" href="logo.ico">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="css/glitch.css">
+	<link rel="stylesheet" href="profile.css">
+	<link rel="stylesheet" href="journal.css">
+<script src="main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init(); initi();">
+<div class="phonedisplay">   
+
+
+
+
+<div class="head">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div>
+<div class ="head2">
+<br /> <br/><br/> <br /><br /><br/><br/>
+<div class="glitch" data-text="bouzazois">bouzazois</div>
+</div>
+
+<br/><br/><br/><br/>
+
+<div style=" background: url(images/journal/entrepreneur.jpg);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); ">
+<div class="category">Formation</div>
+            </div>
+            
+           
+            
+
+
+
+
+
+
+
+
+
+
+            
+<div class="card">
+	<div class="title">7 étapes pour devenir entrepreneur.</div>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">13 Août 2019</span></div><br/><br/><div class="blogcont" style="border-left:10px #f2f2f2 solid;
+	padding-left:15px">
+
+
+<h2>Étape 1:</h2> <h3>Trouvez la bonne entreprise pour vous.</h3>
+
+L'entrepreneuriat est un terme large, et vous pouvez être un entrepreneur dans n'importe quel domaine. Cependant, vous devrez choisir un domaine dans lequel travailler et une entreprise pour démarrer. Trouvez une entreprise qui ne réussira pas seulement, mais qui vous passionnera. L'entrepreneuriat est un travail difficile, vous voulez donc concentrer votre attention sur quelque chose qui vous tient à cœur.
+<br/>
+<h2>Étape 2</h2>
+<h3>Déterminez si vous devriez avoir une éducation</h3>
+Vous n'avez besoin d'aucun type d'éducation formelle pour devenir entrepreneur, mais cela ne signifie pas que vous devez ignorer totalement l'éducation. Si vous souhaitez créer une entreprise de haute technologie, une expérience dans le domaine des affaires, de la programmation informatique et du marketing peut s'avérer utile. En outre, certaines industries nécessiteront probablement un certain type d’éducation, comme votre propre cabinet d’expertise comptable ou d’avocat.
+<br/>
+<h2>Étape 3</h2>
+<h3>Planifiez votre entreprise</h3>
+Avant de démarrer votre entreprise, vous devez avoir un plan d’entreprise. Un plan d'affaires définit vos objectifs ainsi que votre stratégie pour les atteindre. Ce plan est important pour attirer les investisseurs et pour mesurer le succès de votre entreprise.
+<br/>
+<h2>Étape 4:</h2> <h3>Trouvez votre groupe cible / public</h3>
+
+Toutes les entreprises ne plaisent pas à tout le monde. L’âge, le sexe, le revenu, la race et la culture de votre groupe cible joueront un rôle important dans la détermination de votre lieu d’ouverture - ou si vous avez même besoin d’une adresse physique pour vos affaires. Recherchez le groupe qui correspond le mieux à votre modèle d'entreprise, puis mettez tout en œuvre pour attirer ce groupe.
+<br/>
+<h2>Étape 5</h2><h3>
+Réseau</h3>
+Bien que le réseautage soit important dans tous les domaines, il peut être très important pour les entrepreneurs. Le réseautage est la façon dont vous rencontrez d'autres personnes qui pourraient avoir des compétences que vous pouvez utiliser dans votre entreprise. Vous pouvez également trouver des investisseurs potentiels par le biais de la mise en réseau pour vous aider à concrétiser votre modèle d’entreprise. Votre réseau peut également prendre en charge votre entreprise une fois que vous avez ouvert, contribuant ainsi à envoyer de nouveaux clients.
+<br/>
+<h2>Étape 6</h2><h3>
+Vendez votre idée</h3>
+Les consommateurs veulent des produits, mais ils ne savent pas toujours quel produit choisir. En tant qu’entrepreneur, votre travail consiste à convaincre les gens que tout ce que vous vendez est la meilleure option disponible. Vous devrez découvrir ce qui rend votre produit unique, puis le vendre en fonction de la valeur ajoutée.
+<br/>
+<h2>Étape 7</h2><h3>
+Marché</h3>
+Vous devez vous concentrer sur le marketing avant, pendant et après le démarrage de votre entreprise. Vous avez peut-être le meilleur restaurant de la ville, mais personne ne visitera s’ils ne le savent pas. Le marketing est délicat, mais vous devriez pouvoir concentrer vos efforts de marketing sur votre public cible. Par exemple, la génération Y peut être plus susceptible de voir une annonce sur les médias sociaux que sur un panneau d'affichage dans le centre-ville.
+<br/>
+<span class="author"> source: learnhowtobecome.org </span>
+
+           
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">    
+<div class="headcomp">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<10;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div>
+<div class ="head2comp" style=" height:180px;"><br />
+<div class="glitchi" data-text="bouzazois">bouzazois</div>
+</div>
+<br/><br/>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">
+<div style="width:90%; margin-left:7%">
+<br/>
+<div style=" background: url(images/journal/entrepreneur.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;
+   ">
+                <div class="categorycomp">Formation</div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+<div class="cardcomp">
+<a style="text-decoration:none;" class="titlecomp">7 étapes pour devenir entrepreneur.</a>
+	<br/><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">13 Août 2019</span></div>
+<br/><div class="blogcontcomp">
+<<h2>Étape 1:</h2> <h3>Trouvez la bonne entreprise pour vous.</h3>
+
+L'entrepreneuriat est un terme large, et vous pouvez être un entrepreneur dans n'importe quel domaine. Cependant, vous devrez choisir un domaine dans lequel travailler et une entreprise pour démarrer. Trouvez une entreprise qui ne réussira pas seulement, mais qui vous passionnera. L'entrepreneuriat est un travail difficile, vous voulez donc concentrer votre attention sur quelque chose qui vous tient à cœur.
+<br/>
+<h2>Étape 2</h2>
+<h3>Déterminez si vous devriez avoir une éducation</h3>
+Vous n'avez besoin d'aucun type d'éducation formelle pour devenir entrepreneur, mais cela ne signifie pas que vous devez ignorer totalement l'éducation. Si vous souhaitez créer une entreprise de haute technologie, une expérience dans le domaine des affaires, de la programmation informatique et du marketing peut s'avérer utile. En outre, certaines industries nécessiteront probablement un certain type d’éducation, comme votre propre cabinet d’expertise comptable ou d’avocat.
+<br/>
+<h2>Étape 3</h2>
+<h3>Planifiez votre entreprise</h3>
+Avant de démarrer votre entreprise, vous devez avoir un plan d’entreprise. Un plan d'affaires définit vos objectifs ainsi que votre stratégie pour les atteindre. Ce plan est important pour attirer les investisseurs et pour mesurer le succès de votre entreprise.
+<br/>
+<h2>Étape 4:</h2> <h3>Trouvez votre groupe cible / public</h3>
+
+Toutes les entreprises ne plaisent pas à tout le monde. L’âge, le sexe, le revenu, la race et la culture de votre groupe cible joueront un rôle important dans la détermination de votre lieu d’ouverture - ou si vous avez même besoin d’une adresse physique pour vos affaires. Recherchez le groupe qui correspond le mieux à votre modèle d'entreprise, puis mettez tout en œuvre pour attirer ce groupe.
+<br/>
+<h2>Étape 5</h2><h3>
+Réseau</h3>
+Bien que le réseautage soit important dans tous les domaines, il peut être très important pour les entrepreneurs. Le réseautage est la façon dont vous rencontrez d'autres personnes qui pourraient avoir des compétences que vous pouvez utiliser dans votre entreprise. Vous pouvez également trouver des investisseurs potentiels par le biais de la mise en réseau pour vous aider à concrétiser votre modèle d’entreprise. Votre réseau peut également prendre en charge votre entreprise une fois que vous avez ouvert, contribuant ainsi à envoyer de nouveaux clients.
+<br/>
+<h2>Étape 6</h2><h3>
+Vendez votre idée</h3>
+Les consommateurs veulent des produits, mais ils ne savent pas toujours quel produit choisir. En tant qu’entrepreneur, votre travail consiste à convaincre les gens que tout ce que vous vendez est la meilleure option disponible. Vous devrez découvrir ce qui rend votre produit unique, puis le vendre en fonction de la valeur ajoutée.
+<br/>
+<h2>Étape 7</h2><h3>
+Marché</h3>
+Vous devez vous concentrer sur le marketing avant, pendant et après le démarrage de votre entreprise. Vous avez peut-être le meilleur restaurant de la ville, mais personne ne visitera s’ils ne le savent pas. Le marketing est délicat, mais vous devriez pouvoir concentrer vos efforts de marketing sur votre public cible. Par exemple, la génération Y peut être plus susceptible de voir une annonce sur les médias sociaux que sur un panneau d'affichage dans le centre-ville.
+<br/>
+<span class="author"> source: learnhowtobecome.org </span>
+</div>
+</div>
+
+</div>
+
+
+
+
+<br/><hr/><br/>
+
+<div style="margin:0px 4% 0px 4%;>
+
+
+<script id="dsq-count-scr" src="//bouzazois.disqus.com/count.js" async></script>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = bouzazois.disqus.com;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = bouzazois.tk/denenir_entrepreneur; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bouzazois.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+</div>
+
+<br/><hr/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/>
+<div class="whorwe  ">Autres Articles</div>
+
+
+<div class="bgprofs" style="background-color:white;">
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+
+
+
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+<br />
+<center><a href="journal.html" style="text-decoration:none;"><div class="plus">... plus d'articles</div>
+</a></center>
+<br /><br />
+<br />
+</div>
+<br/><br/>
+    
+</div>
+    
+    
+      
+ 
+<style>
+form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}
+</style>
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/><hr/>
+<div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+<div class="contact" >  
+<form id="cont" lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+    
+    
+ 
+ 
+ 
+ 
+ 
+ </div>   
+    
+    
+    
+ 
+ <div class="phonedisplay">
+<div class="footer  "><br/>
+<div class="spons">Sponsors et Parténaires</div>
+	
+<br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div>
+	<br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+   
+ <div style="border-bottom:1px solid blue;"></div>
+<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center>
+</div>
+</div>
+
+
+
+
+
+<!-- compdisplay-->
+
+
+
+
+
+
+
+<div class="compdisplay">
+<br/>
+<div class="whorwecomp  ">Autres Articles</div><br/>
+<div class="maincomp">
+<div class="bgprofscomp" style="background-color:white; padding-left:3%; padding-right:3%;">
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;"><img src="images/journal/journal.jpg" width ="100%" height ="400px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</div></div></a>
+</div><br/>
+ <br /><br /><br />
+</div>
+
+
+
+
+<div class="menucomp">
+		
+<div class="bgprofscomp" style="background-color:white; padding-left:2%; border:0px;">
+		
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div>
+</a><br/><br/>
+
+<a href="coronation_du_chef_des_chasseurs_du_canton_de_madaoua.html" style ="text-decoration: none;">
+<img src="images/journal/journal.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Festival de coronation du chef des chasseurs du Canton de Madaoua. <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1 Sep 2019</font></div>
+</a><br/><br/>
+
+</div>
+</div>
+
+
+
+<br/><a href="journal.html">
+<div class="pluscomp" style="width:40%; padding-left:100px;">... plus d'articles</div></a><br /><br />
+<br />
+
+<br/><br/>
+<div class="compdisplay"><hr style="clear:both;"/>
+    
+</div>
+    
+    
+      
+ 
+<style>form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}</style><br/><br/>
+
+
+
+<!-- Only include this once in your webpage -->
+<script type="text/javascript" src="https://app.99inbound.com/99inbound.js"></script>
+    <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+                 
+       <div class="contact" >    <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+ 
+ </div>   
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="main.js"></script >
+</HTML>
