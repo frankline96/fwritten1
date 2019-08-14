@@ -43,12 +43,12 @@ body {
 }
 
 /*hidden coputer-phone */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
    .compdisplay{
    	display:none;
    }
 }
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 700px) {
    .phonedisplay{
    	display:none;
    }
