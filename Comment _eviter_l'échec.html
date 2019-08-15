@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+<meta name="yandex-verification" content="97baca6a243b2dbd" />
+<meta name="google-site-verification" content="7_ceips8wN2g-Ephh0RIeHMhYg5cCYpZRTdfgT9vZfI" />
+
+<meta name="author" content="Frankline Chisom">
+<title>7 étapes pour devenir entrepreneur | Bouzazois</title>
+<link rel="icon"  type="image/png" href="logo.ico">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="css/glitch.css">
+	<link rel="stylesheet" href="profile.css">
+	<link rel="stylesheet" href="journal.css">
+<script src="main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init(); initi();">
+<div class="phonedisplay">   
+
+
+
+
+<div class="head">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div>
+<div class ="head2">
+<br /> <br/><br/> <br /><br /><br/><br/>
+<div class="glitch" data-text="bouzazois">bouzazois</div>
+</div>
+
+<br/><br/><br/><br/>
+
+<div style=" background: url(images/journal/failure.png);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); ">
+<div class="category">Conseils</div>
+            </div>
+            
+           
+            
+
+
+
+
+
+
+
+
+
+
+            
+<div class="card">
+	<div class="title">Comment eviter l'échec?</div>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">13 Août 2019</span></div><br/><br/><div class="blogcont" style="border-left:10px #f2f2f2 solid;
+	padding-left:15px">
+
+
+
+Vous vous demandez pourquoi vous avez parfois échoué dans la vie sans connaître exactement les raisons de ces échecs et comment éviter les échecs en général? Pourquoi avez-vous manqué tant d'opportunités et de possibilités d'améliorer votre vie? Eh bien, il y a beaucoup de raisons pour l'échec, mais j'ai identifié certaines des erreurs les plus courantes qui causent un manque de succès.
+
+<h2>Comment éviter les échecs:</h2><ul><li><b>
+Soyez engagé et dédié à 100%! </b>Une chose spécifique que j’ai remarquée lors de l’analyse des échecs est que les gens n’ont pas montré leur engagement le plus complet envers leurs projets ou les objectifs qu’ils visaient. Ils manquaient de l'engagement nécessaire, ce qui les empêchait de faire leur travail à moitié, engendrant ainsi des échecs et des frustrations. La clé pour mener à bien des projets extraordinaires est de se concentrer sur ces tâches avec<ul style="border-left:3px solid grey;"><li>
+tout ton désir</li><li>
+votre plus grande attention</li><li>
+engagement et dévouement</li></ul></li><li>
+<b>Évitez un manque d'engagement!</b> le manque d'engagement est un facteur très important d'échec. Vous devrez toujours garder à l'esprit qu'une mission dans laquelle vous n'êtes pas totalement engagé peut toujours aboutir à un échec. Mais une fois que vous saurez comment éviter les échecs et commencer à atteindre des objectifs spécifiques avec tous vos désirs et votre énergie, le pourcentage d'échecs et de pannes sera considérablement réduit.</li><li><b>
+Concentrez votre attention!</b> Une autre erreur très courante qui est la principale raison de l'échec est d'avoir plusieurs projets et objectifs que vous essayez de poursuivre en même temps. C'est toujours bien d'avoir des objectifs dans la vie, mais le problème d'avoir trop de projets en même temps est que vous ne pourrez pas accorder la plus grande attention à chaque projet. Il en résulte une surcharge mentale ainsi qu'une négligence de qualité, les exigences de base pour les défaillances et les effondrements. Au lieu d’essayer d’atteindre des dizaines d’objectifs différents, vous devriez vous concentrer uniquement sur ceux qui vous intéressent, mais encore plus ciblés et avec la plus grande intention de faire tout ce qui est nécessaire pour les atteindre.</li><br/>
+<img src="images/journal/stupid-mistake.jpg" height="200px" width="90%"><li><br/><span class="time">
+Éviter les erreurs stupides</span><br/>
+<li><b>
+N'abandonnez pas trop vite! </b>J'ai vu beaucoup de gens se fixer des objectifs vraiment ambitieux et ambitieux pour leur vie qui m'ont vraiment inspiré. Malheureusement, j'ai également vu beaucoup d'entre eux négliger leurs grands objectifs et se rendre après un certain temps. Cela est souvent dû au fait que des obstacles spécifiques sont apparus, les obligeant à abandonner leurs objectifs. Mais n’est-ce pas l’engagement de tout faire pour atteindre un objectif spécifique, une fois que nous l’avons fixé? C'est la volonté d'identifier et de surmonter tous les obstacles afin d'atteindre nos objectifs. C'est ce qui fait notre succès. C’est l’attitude de ne jamais abandonner qui nous permet de savoir comment éviter les échecs.</li></ul><br/><span class="author">source: planetofsuccess.com</span><br/><br/>
+
+           
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">    
+<div class="headcomp">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<10;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div>
+<div class ="head2comp" style=" height:180px;"><br />
+<div class="glitchi" data-text="bouzazois">bouzazois</div>
+</div>
+<br/><br/>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">
+<div style="width:90%; margin-left:7%">
+<br/>
+<div style=" background: url(images/journal/failure.png);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;
+   ">
+                <div class="categorycomp">Conseils</div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+<div class="cardcomp">
+<a style="text-decoration:none;" class="titlecomp">Comment eviter l'échec?</a>
+	<br/><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">13 Août 2019</span></div>
+<br/><div class="blogcontcomp">
+
+Vous vous demandez pourquoi vous avez parfois échoué dans la vie sans connaître exactement les raisons de ces échecs et comment éviter les échecs en général? Pourquoi avez-vous manqué tant d'opportunités et de possibilités d'améliorer votre vie? Eh bien, il y a beaucoup de raisons pour l'échec, mais j'ai identifié certaines des erreurs les plus courantes qui causent un manque de succès.
+
+<h2>Comment éviter les échecs:</h2><ul><li><b>
+Soyez engagé et dédié à 100%! </b>Une chose spécifique que j’ai remarquée lors de l’analyse des échecs est que les gens n’ont pas montré leur engagement le plus complet envers leurs projets ou les objectifs qu’ils visaient. Ils manquaient de l'engagement nécessaire, ce qui les empêchait de faire leur travail à moitié, engendrant ainsi des échecs et des frustrations. La clé pour mener à bien des projets extraordinaires est de se concentrer sur ces tâches avec<ul style="border-left:3px solid grey;"><li>
+tout ton désir</li><li>
+votre plus grande attention</li><li>
+engagement et dévouement</li></ul></li><li>
+<b>Évitez un manque d'engagement!</b> le manque d'engagement est un facteur très important d'échec. Vous devrez toujours garder à l'esprit qu'une mission dans laquelle vous n'êtes pas totalement engagé peut toujours aboutir à un échec. Mais une fois que vous saurez comment éviter les échecs et commencer à atteindre des objectifs spécifiques avec tous vos désirs et votre énergie, le pourcentage d'échecs et de pannes sera considérablement réduit.</li><li><b>
+Concentrez votre attention!</b> Une autre erreur très courante qui est la principale raison de l'échec est d'avoir plusieurs projets et objectifs que vous essayez de poursuivre en même temps. C'est toujours bien d'avoir des objectifs dans la vie, mais le problème d'avoir trop de projets en même temps est que vous ne pourrez pas accorder la plus grande attention à chaque projet. Il en résulte une surcharge mentale ainsi qu'une négligence de qualité, les exigences de base pour les défaillances et les effondrements. Au lieu d’essayer d’atteindre des dizaines d’objectifs différents, vous devriez vous concentrer uniquement sur ceux qui vous intéressent, mais encore plus ciblés et avec la plus grande intention de faire tout ce qui est nécessaire pour les atteindre.</li><br/>
+<img src="images/journal/stupid-mistake.jpg" height="200px" width="90%"><li><br/><span class="time">
+Éviter les erreurs stupides</span><br/>
+<li><b>
+N'abandonnez pas trop vite! </b>J'ai vu beaucoup de gens se fixer des objectifs vraiment ambitieux et ambitieux pour leur vie qui m'ont vraiment inspiré. Malheureusement, j'ai également vu beaucoup d'entre eux négliger leurs grands objectifs et se rendre après un certain temps. Cela est souvent dû au fait que des obstacles spécifiques sont apparus, les obligeant à abandonner leurs objectifs. Mais n’est-ce pas l’engagement de tout faire pour atteindre un objectif spécifique, une fois que nous l’avons fixé? C'est la volonté d'identifier et de surmonter tous les obstacles afin d'atteindre nos objectifs. C'est ce qui fait notre succès. C’est l’attitude de ne jamais abandonner qui nous permet de savoir comment éviter les échecs.</li></ul><br/><span class="author">source: planetofsuccess.com</span><br/><br/>
+</div>
+</div>
+
+</div>
+
+
+
+
+<br/><hr/><br/>
+
+<div style="margin:0px 4% 0px 4%;>
+
+
+<script id="dsq-count-scr" src="//bouzazois.disqus.com/count.js" async></script>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = bouzazois.disqus.com;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = bouzazois.tk/denenir_entrepreneur; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bouzazois.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+</div>
+
+<br/><hr/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/>
+<div class="whorwe  ">Autres Articles</div>
+
+
+<div class="bgprofs" style="background-color:white;">
+<a href="comment_rester_concentré.html" style ="text-decoration: none;">
+<img src="images/journal/staying-focused.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Comment rester concentré ? <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+
+
+
+
+<a href="comment_choisir_une_carrière.html" style ="text-decoration: none;">
+<img src="images/journal/career.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Comment choisir une carrière ? <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+<a href="comment_eviter_l'échec.html" style ="text-decoration: none;">
+<img src="images/journal/failure.png" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Comment éviter l'échec?  <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+<br />
+<center><a href="journal.html" style="text-decoration:none;"><div class="plus">... plus d'articles</div>
+</a></center>
+<br /><br />
+<br />
+</div>
+<br/><br/>
+    
+</div>
+    
+    
+      
+ 
+<style>
+form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}
+</style>
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/><hr/>
+<div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+<div class="contact" >  
+<form id="cont" lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+    
+    
+ 
+ 
+ 
+ 
+ 
+ </div>   
+    
+    
+    
+ 
+ <div class="phonedisplay">
+<div class="footer  "><br/>
+<div class="spons">Sponsors et Parténaires</div>
+	
+<br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div>
+	<br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+   
+ <div style="border-bottom:1px solid blue;"></div>
+<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center>
+</div>
+</div>
+
+
+
+
+
+<!-- compdisplay-->
+
+
+
+
+
+
+
+<div class="compdisplay">
+<br/>
+<div class="whorwecomp  ">Autres Articles</div><br/>
+<div class="maincomp">
+<div class="bgprofscomp" style="background-color:white; padding-left:3%; padding-right:3%;">
+<a href="comment_choisir_une_carrière.html" style ="text-decoration: none;"><img src="images/journal/career.jpg" width ="100%" height ="400px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1">Comment choisir une carrière ? <br /> <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13 Août 2019</div></div></a>
+</div><br/>
+ <br /><br /><br />
+</div>
+
+
+
+
+<div class="menucomp">
+		
+<div class="bgprofscomp" style="background-color:white; padding-left:2%; border:0px;">
+		
+<a href="comment_rester_concentré.html" style ="text-decoration: none;">
+<img src="images/journal/staying-focused.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Comment rester concentré ? <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13 Août 2019</font></div>
+</a><br/><br/>
+
+<a href="https://berlinebot.github.io" style ="text-decoration: none;">
+<img src="images/journal/berlinebot.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Non à l'engouement | Berlinebot <br /> <font class="timecomp" size="3px">•Ad</font></div>
+</a><br/><br/>
+
+</div>
+</div>
+
+
+
+<br/><a href="journal.html">
+<div class="pluscomp" style="width:40%; padding-left:100px;">... plus d'articles</div></a><br /><br />
+<br />
+
+<br/><br/>
+<div class="compdisplay"><hr style="clear:both;"/>
+    
+</div>
+    
+    
+      
+ 
+<style>form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}</style><br/><br/>
+
+
+
+<!-- Only include this once in your webpage -->
+<script type="text/javascript" src="https://app.99inbound.com/99inbound.js"></script>
+    <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+                 
+       <div class="contact" >    <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+ 
+ </div>   
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="main.js"></script >
+</HTML>
