@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="meilleurs parmi les meilleurs">
+<meta name="yandex-verification" content="97baca6a243b2dbd" />
+<meta name="google-site-verification" content="7_ceips8wN2g-Ephh0RIeHMhYg5cCYpZRTdfgT9vZfI" />
+
+<meta name="author" content="Frankline Chisom">
+<title>Comment rester productif? | Bouzazois</title>
+<link rel="icon"  type="image/png" href="logo.ico">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="css/glitch.css">
+	<link rel="stylesheet" href="profile.css">
+	<link rel="stylesheet" href="journal.css">
+<script src="main.js"></script >
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600|Questrial|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body onload="init(); initi();">
+<div class="phonedisplay">   
+
+
+
+
+<div class="head">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvas" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function init(){
+    canvas=document.getElementById("canvas");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<4;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+
+</script>
+<img class="logo" src="logo.jpg" width ="200px" height ="200px" style="border-radius:100px" />
+</div>
+<div class ="head2">
+<br /> <br/><br/> <br /><br /><br/><br/>
+<div class="glitch" data-text="bouzazois">bouzazois</div>
+</div>
+
+<br/><br/><br/><br/>
+
+<div style=" background: url(images/journal/productive.png);
+    height: 200px;
+    width: 100%;
+    background-size: 400px 300px;
+    position: relative;
+    transform: scale(0.9); ">
+<div class="category">Conseils</div>
+            </div>
+            
+           
+            
+
+
+
+
+
+
+
+
+
+
+            
+<div class="card">
+	<div class="title">Comment rester productif?</div>
+	<br/><div><span class="author">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="time">13 Août 2019</span></div><br/><br/><div class="blogcont" style="border-left:10px #f2f2f2 solid;
+	padding-left:15px">
+
+
+
+<br/>Vous arrive-t-il parfois de perdre votre capacité à rester productif à mesure que vous avancez dans votre journée? Aujourd’hui, je vous livre mes dix meilleurs conseils sur la façon de rester productif tout au long de la journée, de sorte que vous puissiez bien dormir, sachant que vous avez été votre personne la plus efficace!
+<br/><b><br/>
+Commencez lentement
+</b><br/><br/>
+La façon dont nous commençons nos matins peut programmer la façon dont nous allons mener nos journées à venir. Il est donc crucial de commencer lentement, avec un état d'esprit positif. Profitez de votre temps le matin; J'aime faire de la méditation, de la respiration profonde ou de la lecture pour m'amener lentement dans la journée. Il peut également être utile de noter certaines choses pour lesquelles vous êtes reconnaissant, afin de maintenir un état d’esprit optimiste. Prendre ce petit peu de temps pour passer la journée en douceur peut réellement vous éviter de devenir stressé ou troublé tout au long de la journée.
+<br/><b><br/>
+Avoir un tech-tox
+</b><br/><br/>
+Essayez d'éviter la technologie pendant les 30 premières minutes de votre journée. Se réveiller et prendre votre téléphone tout de suite peut vous inciter à être immédiatement entraîné dans des distractions et des impératifs de travail qui détourneront votre attention des choses plus importantes sur lesquelles vous devriez vous concentrer le matin.
+<br/><b><br/>
+Exercice pendant au moins 7 minutes
+</b><br/><br/>
+L'exercice est un moyen fantastique de libérer des endorphines, ce qui peut considérablement améliorer votre humeur tout au long de la journée. L'exercice vous aidera également à combattre les sensations de paresse et à vous sentir frais et prêt à affronter le grand jour!
+<br/><b><br/>
+Commencez votre journée verte
+</b><br/><br/>
+Ok… donc je ne dis pas que vous devez avoir des œufs verts et du jambon! Mais essayez d’avoir un smoothie vert, seul ou avec un autre plat du petit-déjeuner. J'aime inclure des épinards, de la spiruline, de la banane et du lait d'amande dans mes smoothies du matin! Un petit-déjeuner sain est un excellent moyen de commencer une journée saine. De plus, il s’agit du repas le plus important de la journée (au moment de rompre le jeûne), alors assurez-vous de vous alimenter avec les bons aliments qui vous soutiendront pour la journée!
+<br/><b><br/>
+Choisissez 3 victoires
+</b><br/><br/>
+Par 3 victoires, je veux dire 3 priorités! Ne vous laissez pas submerger par une liste irréaliste d'objectifs quotidiens. Au lieu de cela, choisissez 3 victoires principales et concentrez votre énergie sur leur réalisation tout au long de la journée! Cela vous aidera à rester concentré et vous empêchera de détourner potentiellement votre attention de ce qui est important.
+<br/><b><br/>
+Apprenez à dire NON
+</b><br/><br/>
+Beaucoup d'entre nous (y compris moi-même) peuvent s'épuiser en consacrant trop de temps aux autres et en oubliant de se donner la priorité. Veillez à ne pas trop vous éparpiller et à reconnaître qu'il est acceptable de dire non! Cela signifie que vous devez vous accorder un peu de temps et vous assurer de ne pas trop vous engager dans trop d’activités qui vous laisseront sans énergie.
+<br/><b><br/>
+Prendre des pauses fréquentes
+</b><br/><br/>
+Nous pouvons perdre notre concentration si nous ne nous accordons pas suffisamment de temps de pause. Essayez de prendre des pauses fréquentes toutes les 30 minutes environ pour vous regrouper et vous rafraîchir. Vous pourrez mieux maintenir votre concentration, car vous ne deviendrez pas fatigué mentalement.
+<br/><b><br/>
+Le bloquer
+</b><br/><br/>
+La meilleure façon de faire les choses est de décomposer les tâches que vous devez faire en rendez-vous à temps. En allouant du temps pour vos tâches, cela vous aidera à rester concentré et à vous empêcher de consacrer trop ou trop peu de temps à une activité donnée.Assurez-vous de toujours prévoir suffisamment de temps. Dans la plupart des cas, cela signifiedavantage de temps pour les petits ratés inattendus que vous pourriez rencontrer dans la vie quotidienne!
+<br/><b><br/>
+Préparation après le déjeuner
+</b><br/><br/>
+Le déjeuner peut être la bosse du jour. Pour beaucoup d'entre nous, nous avons travaillé dur toute la journée et il est temps que notre efficacité diminue. Pour éviter cela, essayez de vous réinitialiser. Prenez du temps à l'extérieur de votre bureau, mangez à l'extérieur, discutez avec des amis, puis regroupez-vous. En vous reposant et en vous ressourçant suffisamment à l'heure du déjeuner, vous pourrez rentrer dans la deuxième partie de la journée en vous sentant rafraîchi et motivé.
+<br/><b><br/>
+Évitez les distractions!
+</b><br/><br/>
+Essayez de rester à l'écart des activités qui vous égareront! À la place, accordez-vous un moment de distraction où vous pourrez vous détendre et faire ce que vous voulez.Vous voudrez peut-être mettre de côté la première heure de votre soirée lorsque vous rentrerez chez vous pour regarder la télévision, faire défiler les médias sociaux ou appeler un ami. Cela vous aidera à éviter les sentiments de culpabilité qui ont tendance à se glisser lorsque vous savez que vous devriez vous concentrer sur une tâche mais que votre esprit vous interroge ou vérifie votre téléphone trop souvent!
+<br/><br/>
+Réfléchissez à votre routine quotidienne et à la manière dont vous pouvez intégrer certains de ces conseils, sinon tous, à votre style de vie!
+<br/><br/>
+<span class="author">source: educationerybyjess.com</span>
+<br/><br/>
+
+           
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">    
+<div class="headcomp">
+<canvas style="width: 100%; height:150px; z-index:1; position: absolute;  top:0px;" id="canvasa" ontouchstart=""></canvas>
+<script>
+
+const {random,sin,cos,atan2,hypot,PI}=Math;
+
+let canvas,ctx;
+let W,H;
+let chains=[];
+let balls=[];
+
+class Ball{
+    constructor(){
+        this.x=W/2;
+        this.y=H/2;
+        this.dx=random()*10-5;
+        this.dy=random()*10-5;
+        this.hairs=[];
+        for(let i=0;i<360;i+=15)
+        this.hairs.push(new Chain(7,48,this.x+20*cos(i*PI/180),this.y+20*sin(i*PI/180)));
+        this.prevdx=0;
+        this.prevdy=0;
+    
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,20,0,2*PI);
+        ctx.closePath();
+        ctx.fill();
+        for(let h of this.hairs)
+        h.draw();
+    }
+    update(){
+        if(this.x+this.dx>=W)this.dx*=-1;
+        else if(this.x+this.dx<0)this.dx*=-1;
+        if(this.y+this.dy>=H)this.dy*=-1;
+        else if(this.y+this.dy<0)this.dy*=-1;
+        
+        this.x+=this.dx;
+        this.y+=this.dy;
+        for(let h of this.hairs){
+            h.links[0].x+=this.dx;
+            h.links[0].y+=this.dy;
+            h.update();
+        }
+        this.prevdx=this.dx;
+        this.prevdy=this.dy;
+        this.dx=(this.prevdx*2+random()-0.5)/2;
+        this.dx=this.dx>2?2:this.dx;
+        this.dx=this.dx<-2?-2:this.dx;
+        this.dy=(this.prevdy*2+random()-0.5)/2;
+        this.dy=this.dy>4?4:this.dy;
+        this.dy=this.dy<-4?-4:this.dy;
+    }
+}
+
+class Link{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+}
+
+
+class Chain{
+    constructor(chainLength,linkLength,x,y){
+        this.links=[];
+        for(let i=0;i<chainLength;i++){
+            this.links.push(new Link(x,y));
+        }
+        this.linkLength=linkLength;
+    }
+    draw(){
+        ctx.beginPath()
+        ctx.moveTo(this.links[0].x,this.links[0].y);
+        for(let i=1;i<this.links.length;i++){
+            ctx.lineWidth=(this.links.length-i)/(30);
+            ctx.lineTo(this.links[i].x,this.links[i].y);
+            ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(this.links[0].x,this.links[0].y,this.links.length/5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    update(){
+        for(let i=1;i<this.links.length;i++){
+            let angle= atan2(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            let distance= hypot(this.links[i-1].y-this.links[i].y, this.links[i-1].x-this.links[i].x);
+            if(distance>this.linkLength){
+                this.links[i].x=this.links[i-1].x-cos(angle)*this.linkLength;
+                this.links[i].y=this.links[i-1].y-sin(angle)*this.linkLength;
+            }
+        }
+    }
+}
+
+function initi(){
+    canvas=document.getElementById("canvasa");
+    canvas.width=W=innerWidth;
+    canvas.height=H=innerHeight;
+    ctx=canvas.getContext("2d");
+    ctx.fillRect(0,0,W,H);
+    
+    for(let i=0;i<10;i++)
+    balls.push(new Ball());
+    
+    loop();
+}
+
+function loop(){
+    ctx.fillStyle="rgba(0,0,0,0.4)";
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(0,0,225,0.1)";
+    ctx.strokeStyle="blue";
+    for(let ball of balls){
+    ball.draw();
+    ball.update();
+    }
+    requestAnimationFrame(loop);
+}
+
+</script>
+<img class="logocomp" src="logo.jpg" width ="300px" height ="300px" style="border-radius:150px" />
+</div>
+<div class ="head2comp" style=" height:180px;"><br />
+<div class="glitchi" data-text="bouzazois">bouzazois</div>
+</div>
+<br/><br/>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="compdisplay">
+<div style="width:90%; margin-left:7%">
+<br/>
+<div style=" background: url(images/journal/productive.jpg);
+    height: 400px;
+    width: 100%;
+    background-size: 100% 400px;
+    position: relative;
+    transform: scale(0.9); 
+   border:1px solid lightgrey;
+   border-radius:2px;
+   background-repeat:no-repeat;
+   ">
+                <div class="categorycomp">Conseils</div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+<div class="cardcomp">
+<a style="text-decoration:none;" class="titlecomp">Comment rester productif?</a>
+	<br/><span class="authorcomp">Frankline Chisom</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class ="timecomp">13 Août 2019</span></div>
+<br/><div class="blogcontcomp">
+
+<br/>Vous arrive-t-il parfois de perdre votre capacité à rester productif à mesure que vous avancez dans votre journée? Aujourd’hui, je vous livre mes dix meilleurs conseils sur la façon de rester productif tout au long de la journée, de sorte que vous puissiez bien dormir, sachant que vous avez été votre personne la plus efficace!
+<br/><b><br/>
+Commencez lentement
+</b><br/><br/>
+La façon dont nous commençons nos matins peut programmer la façon dont nous allons mener nos journées à venir. Il est donc crucial de commencer lentement, avec un état d'esprit positif. Profitez de votre temps le matin; J'aime faire de la méditation, de la respiration profonde ou de la lecture pour m'amener lentement dans la journée. Il peut également être utile de noter certaines choses pour lesquelles vous êtes reconnaissant, afin de maintenir un état d’esprit optimiste. Prendre ce petit peu de temps pour passer la journée en douceur peut réellement vous éviter de devenir stressé ou troublé tout au long de la journée.
+<br/><b><br/>
+Avoir un tech-tox
+</b><br/><br/>
+Essayez d'éviter la technologie pendant les 30 premières minutes de votre journée. Se réveiller et prendre votre téléphone tout de suite peut vous inciter à être immédiatement entraîné dans des distractions et des impératifs de travail qui détourneront votre attention des choses plus importantes sur lesquelles vous devriez vous concentrer le matin.
+<br/><b><br/>
+Exercice pendant au moins 7 minutes
+</b><br/><br/>
+L'exercice est un moyen fantastique de libérer des endorphines, ce qui peut considérablement améliorer votre humeur tout au long de la journée. L'exercice vous aidera également à combattre les sensations de paresse et à vous sentir frais et prêt à affronter le grand jour!
+<br/><b><br/>
+Commencez votre journée verte
+</b><br/><br/>
+Ok… donc je ne dis pas que vous devez avoir des œufs verts et du jambon! Mais essayez d’avoir un smoothie vert, seul ou avec un autre plat du petit-déjeuner. J'aime inclure des épinards, de la spiruline, de la banane et du lait d'amande dans mes smoothies du matin! Un petit-déjeuner sain est un excellent moyen de commencer une journée saine. De plus, il s’agit du repas le plus important de la journée (au moment de rompre le jeûne), alors assurez-vous de vous alimenter avec les bons aliments qui vous soutiendront pour la journée!
+<br/><b><br/>
+Choisissez 3 victoires
+</b><br/><br/>
+Par 3 victoires, je veux dire 3 priorités! Ne vous laissez pas submerger par une liste irréaliste d'objectifs quotidiens. Au lieu de cela, choisissez 3 victoires principales et concentrez votre énergie sur leur réalisation tout au long de la journée! Cela vous aidera à rester concentré et vous empêchera de détourner potentiellement votre attention de ce qui est important.
+<br/><b><br/>
+Apprenez à dire NON
+</b><br/><br/>
+Beaucoup d'entre nous (y compris moi-même) peuvent s'épuiser en consacrant trop de temps aux autres et en oubliant de se donner la priorité. Veillez à ne pas trop vous éparpiller et à reconnaître qu'il est acceptable de dire non! Cela signifie que vous devez vous accorder un peu de temps et vous assurer de ne pas trop vous engager dans trop d’activités qui vous laisseront sans énergie.
+<br/><b><br/>
+Prendre des pauses fréquentes
+</b><br/><br/>
+Nous pouvons perdre notre concentration si nous ne nous accordons pas suffisamment de temps de pause. Essayez de prendre des pauses fréquentes toutes les 30 minutes environ pour vous regrouper et vous rafraîchir. Vous pourrez mieux maintenir votre concentration, car vous ne deviendrez pas fatigué mentalement.
+<br/><b><br/>
+Le bloquer
+</b><br/><br/>
+La meilleure façon de faire les choses est de décomposer les tâches que vous devez faire en rendez-vous à temps. En allouant du temps pour vos tâches, cela vous aidera à rester concentré et à vous empêcher de consacrer trop ou trop peu de temps à une activité donnée.Assurez-vous de toujours prévoir suffisamment de temps. Dans la plupart des cas, cela signifiedavantage de temps pour les petits ratés inattendus que vous pourriez rencontrer dans la vie quotidienne!
+<br/><b><br/>
+Préparation après le déjeuner
+</b><br/><br/>
+Le déjeuner peut être la bosse du jour. Pour beaucoup d'entre nous, nous avons travaillé dur toute la journée et il est temps que notre efficacité diminue. Pour éviter cela, essayez de vous réinitialiser. Prenez du temps à l'extérieur de votre bureau, mangez à l'extérieur, discutez avec des amis, puis regroupez-vous. En vous reposant et en vous ressourçant suffisamment à l'heure du déjeuner, vous pourrez rentrer dans la deuxième partie de la journée en vous sentant rafraîchi et motivé.
+<br/><b><br/>
+Évitez les distractions!
+</b><br/><br/>
+Essayez de rester à l'écart des activités qui vous égareront! À la place, accordez-vous un moment de distraction où vous pourrez vous détendre et faire ce que vous voulez.Vous voudrez peut-être mettre de côté la première heure de votre soirée lorsque vous rentrerez chez vous pour regarder la télévision, faire défiler les médias sociaux ou appeler un ami. Cela vous aidera à éviter les sentiments de culpabilité qui ont tendance à se glisser lorsque vous savez que vous devriez vous concentrer sur une tâche mais que votre esprit vous interroge ou vérifie votre téléphone trop souvent!
+<br/><br/>
+Réfléchissez à votre routine quotidienne et à la manière dont vous pouvez intégrer certains de ces conseils, sinon tous, à votre style de vie!
+<br/><br/>
+<span class="author">source: educationerybyjess.com</span>
+<br/><br/>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+<br/><hr/><br/>
+
+<div style="margin:0px 4% 0px 4%;>
+
+
+<script id="dsq-count-scr" src="//bouzazois.disqus.com/count.js" async></script>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = bouzazois.disqus.com;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = bouzazois.tk/rester_productif; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://bouzazois.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+</div>
+
+<br/><hr/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/>
+<div class="whorwe  ">Autres Articles</div>
+
+
+<div class="bgprofs" style="background-color:white;">
+<a href="7_étapes_pour_devenir_entrepreneur.html" style ="text-decoration: none;">
+<img src="images/journal/entrepreneur.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">7 étapes pour devenir entrepreneur <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+
+
+
+
+<a href="comment_choisir_une_carrière.html" style ="text-decoration: none;">
+<img src="images/journal/career.jpg" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Comment choisir une carrière ? <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+
+<a href="comment_eviter_l'échec.html" style ="text-decoration: none;">
+<img src="images/journal/failure.png" width ="90%" height ="180px" style="border:1px solid grey; border-radius:3px;">
+<div style="font-size: 12px;color: grey; padding-left:0px;">Comment éviter l'échec?  <br /> <font size="1px">&boxh;Frankline Chisom</font>
+</div>
+</a><br/>
+<div class="hrjournal"></div>
+<br />
+
+
+<br />
+<center><a href="journal.html" style="text-decoration:none;"><div class="plus">... plus d'articles</div>
+</a></center>
+<br /><br />
+<br />
+</div>
+<br/><br/>
+    
+</div>
+    
+    
+      
+ 
+<style>
+form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}
+</style>
+
+
+
+
+
+
+<div class="phonedisplay">
+<br/><br/><hr/>
+<div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+<div class="contact" >  
+<form id="cont" lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+    
+    
+ 
+ 
+ 
+ 
+ 
+ </div>   
+    
+    
+    
+ 
+ <div class="phonedisplay">
+<div class="footer  "><br/>
+<div class="spons">Sponsors et Parténaires</div>
+	
+<br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div>
+	<br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:blue;
+   font-size:12px; position:relative; left:35%;">devenir notre sponsor ou parténaire</a><br/><br/>
+   
+ <div style="border-bottom:1px solid blue;"></div>
+<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:13px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center>
+</div>
+</div>
+
+
+
+
+
+<!-- compdisplay-->
+
+
+
+
+
+
+
+<div class="compdisplay">
+<br/>
+<div class="whorwecomp  ">Autres Articles</div><br/>
+<div class="maincomp">
+<div class="bgprofscomp" style="background-color:white; padding-left:3%; padding-right:3%;">
+<a href="comment_choisir_une_carrière.html" style ="text-decoration: none;"><img src="images/journal/career.jpg" width ="100%" height ="400px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1">Comment choisir une carrière ? <br /> <div class="timecomp1">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13 Août 2019</div></div></a>
+</div><br/>
+ <br /><br /><br />
+</div>
+
+
+
+
+<div class="menucomp">
+		
+<div class="bgprofscomp" style="background-color:white; padding-left:2%; border:0px;">
+		
+<a href="comment_rester_concentré.html" style ="text-decoration: none;">
+<img src="images/journal/staying-focused.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Comment rester concentré ? <br /> <font class="timecomp" size="3px">&boxh;Frankline Chisom &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;13 Août 2019</font></div>
+</a><br/><br/>
+
+<a href="https://berlinebot.github.io" style ="text-decoration: none;">
+<img src="images/journal/berlinebot.jpg" width ="95%" height ="150px" style="border:1px solid grey; border-radius:3px;" />
+<div class="art1" style="font-size: 20px;color: grey; padding-left:0px; width:100%;">Non à l'engouement | Berlinebot <br /> <font class="timecomp" size="3px">•Ad</font></div>
+</a><br/><br/>
+
+</div>
+</div>
+
+
+
+<br/><a href="journal.html">
+<div class="pluscomp" style="width:40%; padding-left:100px;">... plus d'articles</div></a><br /><br />
+<br />
+
+<br/><br/>
+<div class="compdisplay"><hr style="clear:both;"/>
+    
+</div>
+    
+    
+      
+ 
+<style>form {
+    text-align: center;
+    margin-top: 0;
+}
+.submit {
+    background-color: #3333ff;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    margin: 0;
+    font-weight: bold;
+}
+.submit:hover {
+    background-color: #8080ff;
+}
+textarea {
+    height: 100px;
+}
+input, textarea {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    padding: 15px 10px 10px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: #787575;
+    border-radius: 5px;
+    width: 70%;
+    outline: none;
+}</style><br/><br/>
+
+
+
+<!-- Only include this once in your webpage -->
+<script type="text/javascript" src="https://app.99inbound.com/99inbound.js"></script>
+    <div class="whorwe" style="border:0px; text-align:center;">Contactez nous</div>
+                 
+       <div class="contact" >    <form lang="fr" action="https://app.99inbound.com/api/e/ASqc58MY" method="POST">
+                <input name="name" placeholder="Nom" type="text" required /><br/>
+                <input name="Email" placeholder="Email" type="email" required /><br/>
+                <textarea name="message" placeholder="Votre message" required ></textarea>
+                <input type="submit" value="ENVOYER" class="submit" />
+            </form>  </div>
+    <br/><br/>
+ 
+ </div>   
+<div class="footercomp  compdisplay"><br/>
+	<div class="sponscomp">Sponsors et Parténaires</div><br/><div style="border-bottom:2px solid white; margin:0px 4%; "></div><br />
+	<a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:9px; position:relative; left:60%;">devenir notre sponsor ou parténaire</a><br/><br/>
+	
+	<div style="border-bottom:1px solid blue;"></div>
+	<table style="width:100%; padding:0px 10px; align:center;">
+  <tr>
+    <td style="padding:9px 0px;"><a href="journal.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding:9px 0px;">Journal</a></td>
+      <td style="padding:9px 4px;"><a href="conditions-d'utilisations.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px; padding-left:50px;">Conditions d'utilisation</a></td> 
+  </tr>
+  <tr>
+    <td style="padding:9px 0px;"><a href="" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Plus sur Nous</a></td>
+  
+   <td style="padding-left:50px;"><a href="Contact.html" style="text-decoration:none;
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:25px;">Contactez Nous</a></td>
+      
+  </tr>
+</table>
+<div style="border-bottom:1px solid blue;"></div><center style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:white;
+   font-size:16px; padding:6px 0px;">
+ © Bouzazois 2019</center>
+</div>
+
+<center class="compdisplay" style="
+   font-family: 'roboto', sans-serif !   important; 
+   color:grey;
+   font-size:14px; padding:6px 0px;">
+crée avec &hearts; par <a href="franklinechisom.html" style="text-decoration:none;">Frankline</a>  </center></div></div>
+</body>
+<script src="main.js"></script >
+</HTML>
